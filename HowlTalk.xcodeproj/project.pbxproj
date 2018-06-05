@@ -11,9 +11,13 @@
 		8318C9E220C3FD7D00144C4D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318C9E120C3FD7D00144C4D /* Logger.swift */; };
 		8318C9E420C4037300144C4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8318C9E320C4037300144C4D /* GoogleService-Info.plist */; };
 		8318C9E620C4089800144C4D /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */; };
+		8337ECE420C6C60D00CB2C2E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */; };
+		8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */; };
+		8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */; };
+		8337ECE920C6C8BD00CB2C2E /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8337ECE820C6C8BD00CB2C2E /* SignUpViewController.storyboard */; };
 		835952CC20B3B0C400E1ECDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835952CB20B3B0C400E1ECDA /* AppDelegate.swift */; };
-		835952CE20B3B0C400E1ECDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835952CD20B3B0C400E1ECDA /* ViewController.swift */; };
-		835952D120B3B0C400E1ECDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835952CF20B3B0C400E1ECDA /* Main.storyboard */; };
+		835952CE20B3B0C400E1ECDA /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835952CD20B3B0C400E1ECDA /* LogInViewController.swift */; };
+		835952D120B3B0C400E1ECDA /* LogInViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835952CF20B3B0C400E1ECDA /* LogInViewController.storyboard */; };
 		835952D320B3B0C500E1ECDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835952D220B3B0C500E1ECDA /* Assets.xcassets */; };
 		835952D620B3B0C500E1ECDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835952D420B3B0C500E1ECDA /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -24,10 +28,14 @@
 		8318C9E120C3FD7D00144C4D /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8318C9E320C4037300144C4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
+		8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		8337ECE820C6C8BD00CB2C2E /* SignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController.storyboard; sourceTree = "<group>"; };
 		835952C820B3B0C400E1ECDA /* HowlTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowlTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		835952CB20B3B0C400E1ECDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		835952CD20B3B0C400E1ECDA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		835952D020B3B0C400E1ECDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		835952CD20B3B0C400E1ECDA /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		835952D020B3B0C400E1ECDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LogInViewController.storyboard; sourceTree = "<group>"; };
 		835952D220B3B0C500E1ECDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		835952D520B3B0C500E1ECDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835952D720B3B0C500E1ECDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +65,8 @@
 		8318C9DE20C3FB3500144C4D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */,
+				8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */,
 				8318C9E120C3FD7D00144C4D /* Logger.swift */,
 			);
 			path = Common;
@@ -85,11 +95,13 @@
 			children = (
 				8318C9DE20C3FB3500144C4D /* Common */,
 				835952CB20B3B0C400E1ECDA /* AppDelegate.swift */,
-				835952CD20B3B0C400E1ECDA /* ViewController.swift */,
-				835952CF20B3B0C400E1ECDA /* Main.storyboard */,
+				835952CD20B3B0C400E1ECDA /* LogInViewController.swift */,
+				835952CF20B3B0C400E1ECDA /* LogInViewController.storyboard */,
 				835952D220B3B0C500E1ECDA /* Assets.xcassets */,
 				835952D420B3B0C500E1ECDA /* LaunchScreen.storyboard */,
 				835952D720B3B0C500E1ECDA /* Info.plist */,
+				8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */,
+				8337ECE820C6C8BD00CB2C2E /* SignUpViewController.storyboard */,
 				8318C9E320C4037300144C4D /* GoogleService-Info.plist */,
 				8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */,
 			);
@@ -169,7 +181,8 @@
 				8318C9E620C4089800144C4D /* RemoteConfigDefaults.plist in Resources */,
 				8318C9E420C4037300144C4D /* GoogleService-Info.plist in Resources */,
 				835952D320B3B0C500E1ECDA /* Assets.xcassets in Resources */,
-				835952D120B3B0C400E1ECDA /* Main.storyboard in Resources */,
+				835952D120B3B0C400E1ECDA /* LogInViewController.storyboard in Resources */,
+				8337ECE920C6C8BD00CB2C2E /* SignUpViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,21 +240,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				835952CE20B3B0C400E1ECDA /* ViewController.swift in Sources */,
+				8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */,
+				8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */,
+				835952CE20B3B0C400E1ECDA /* LogInViewController.swift in Sources */,
 				835952CC20B3B0C400E1ECDA /* AppDelegate.swift in Sources */,
 				8318C9E220C3FD7D00144C4D /* Logger.swift in Sources */,
+				8337ECE420C6C60D00CB2C2E /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		835952CF20B3B0C400E1ECDA /* Main.storyboard */ = {
+		835952CF20B3B0C400E1ECDA /* LogInViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				835952D020B3B0C400E1ECDA /* Base */,
 			);
-			name = Main.storyboard;
+			name = LogInViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		835952D420B3B0C500E1ECDA /* LaunchScreen.storyboard */ = {
@@ -377,7 +393,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77F6X5R2CN;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -393,7 +412,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77F6X5R2CN;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

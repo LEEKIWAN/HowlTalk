@@ -62,7 +62,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dr-uX-5WA">
-                                <rect key="frame" x="151" y="432" width="46" height="30"/>
+                                <rect key="frame" x="13" y="390" width="349" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0ZO-Vh-pZK"/>
@@ -72,7 +72,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEh-q0-9Ia">
-                                <rect key="frame" x="151" y="501" width="46" height="30"/>
+                                <rect key="frame" x="13" y="450" width="349" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="il4-xY-TBN"/>
@@ -103,6 +103,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="dbu-m0-gN5" id="XE6-6D-b8L"/>
+                        <outlet property="logInButton" destination="0dr-uX-5WA" id="M1c-f4-0P2"/>
+                        <outlet property="passwordTextField" destination="53U-6a-gmR" id="dlo-9k-QEM"/>
+                        <outlet property="signInButton" destination="ZEh-q0-9Ia" id="pn9-Gp-yoS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
