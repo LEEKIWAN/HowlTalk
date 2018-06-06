@@ -72,6 +72,26 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		8347056A20C7FE9600C5B44E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				835952CF20B3B0C400E1ECDA /* LogInViewController.storyboard */,
+				8337ECE820C6C8BD00CB2C2E /* SignUpViewController.storyboard */,
+			);
+			name = View;
+			path = "New Group/View";
+			sourceTree = "<group>";
+		};
+		8347056B20C7FE9600C5B44E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				835952CD20B3B0C400E1ECDA /* LogInViewController.swift */,
+				8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */,
+			);
+			name = Controller;
+			path = "New Group/New Group/New Group";
+			sourceTree = "<group>";
+		};
 		835952BF20B3B0C400E1ECDA = {
 			isa = PBXGroup;
 			children = (
@@ -95,13 +115,11 @@
 			children = (
 				8318C9DE20C3FB3500144C4D /* Common */,
 				835952CB20B3B0C400E1ECDA /* AppDelegate.swift */,
-				835952CD20B3B0C400E1ECDA /* LogInViewController.swift */,
-				835952CF20B3B0C400E1ECDA /* LogInViewController.storyboard */,
-				835952D220B3B0C500E1ECDA /* Assets.xcassets */,
 				835952D420B3B0C500E1ECDA /* LaunchScreen.storyboard */,
+				8347056A20C7FE9600C5B44E /* View */,
+				8347056B20C7FE9600C5B44E /* Controller */,
+				835952D220B3B0C500E1ECDA /* Assets.xcassets */,
 				835952D720B3B0C500E1ECDA /* Info.plist */,
-				8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */,
-				8337ECE820C6C8BD00CB2C2E /* SignUpViewController.storyboard */,
 				8318C9E320C4037300144C4D /* GoogleService-Info.plist */,
 				8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */,
 			);
@@ -455,7 +473,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77F6X5R2CN;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -471,7 +492,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77F6X5R2CN;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

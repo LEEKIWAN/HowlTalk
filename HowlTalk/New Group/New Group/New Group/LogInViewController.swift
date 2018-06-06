@@ -44,9 +44,9 @@ class ViewController: UIViewController {
     func setThemeColor() {
         let themeColor = remoteConfig["themeColor"].stringValue
         
-        signInButton.backgroundColor = UIColor.init(hexString: themeColor!)
+        signInButton.backgroundColor = UIColor(hexString: themeColor!)
 
-        logInButton.backgroundColor = UIColor.init(hexString: themeColor!)
+        logInButton.backgroundColor = UIColor(hexString: themeColor!)
         
     }
     

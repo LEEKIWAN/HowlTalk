@@ -10,6 +10,7 @@ target 'HowlTalk' do
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'FirebaseUI'
 #  pod 'SnapKit', '~> 4.0.0'
   pod 'TextFieldEffects'

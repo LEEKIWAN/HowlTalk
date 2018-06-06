@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E892E5E4AAC6FFAD79F7537673BE8516"
+               BlueprintIdentifier = "05C075013CDDB2D1C59C5898561BC6BC"
                BuildableName = "Pods_HowlTalk.framework"
                BlueprintName = "Pods-HowlTalk"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E892E5E4AAC6FFAD79F7537673BE8516"
+            BlueprintIdentifier = "05C075013CDDB2D1C59C5898561BC6BC"
             BuildableName = "Pods_HowlTalk.framework"
             BlueprintName = "Pods-HowlTalk"
             ReferencedContainer = "container:Pods.xcodeproj">

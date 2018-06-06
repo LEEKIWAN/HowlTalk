@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,8 +20,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IhA-q6-xNc" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="13" y="182" width="349" height="50"/>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_a_photo_black" translatesAutoresizingMaskIntoConstraints="NO" id="MhO-Sk-sbC">
+                                <rect key="frame" x="112.5" y="58.5" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="MhO-Sk-sbC" secondAttribute="height" multiplier="1:1" id="WuX-lG-aSS"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IhA-q6-xNc" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="13" y="228.5" width="349" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="atv-wB-M4f"/>
                                 </constraints>
@@ -36,8 +43,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WDP-Ym-4WQ" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="13" y="245" width="349" height="50"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WDP-Ym-4WQ" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="13" y="291.5" width="349" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="59p-Ts-ZPN"/>
                                 </constraints>
@@ -54,7 +61,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RJS-ax-bsd" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="13" y="308" width="349" height="50"/>
+                                <rect key="frame" x="13" y="354.5" width="349" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="l93-t4-XOr"/>
                                 </constraints>
@@ -71,21 +78,27 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpo-i9-hA6">
-                                <rect key="frame" x="13" y="371" width="349" height="50"/>
+                                <rect key="frame" x="13" y="417.5" width="349" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="VME-HC-d7z"/>
                                 </constraints>
-                                <state key="normal" title="회원가입"/>
+                                <state key="normal" title="회원가입">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="onSignUpTouched:" destination="8oR-ZP-qyd" eventType="touchUpInside" id="d3L-iM-ooC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CML-xl-YvA">
-                                <rect key="frame" x="13" y="434" width="349" height="50"/>
+                                <rect key="frame" x="13" y="480.5" width="349" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="EqG-nk-87J"/>
                                 </constraints>
-                                <state key="normal" title="취소"/>
+                                <state key="normal" title="취소">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="onCancelTouched:" destination="8oR-ZP-qyd" eventType="touchUpInside" id="e9z-i6-0cb"/>
                                 </connections>
@@ -95,28 +108,32 @@
                         <constraints>
                             <constraint firstItem="RJS-ax-bsd" firstAttribute="leading" secondItem="LP1-vo-Mq0" secondAttribute="leading" constant="13" id="0GY-yt-qn5"/>
                             <constraint firstItem="CML-xl-YvA" firstAttribute="leading" secondItem="LP1-vo-Mq0" secondAttribute="leading" constant="13" id="4dd-Rk-rwj"/>
+                            <constraint firstItem="IhA-q6-xNc" firstAttribute="top" secondItem="MhO-Sk-sbC" secondAttribute="bottom" constant="20" id="C6E-pH-u2v"/>
                             <constraint firstItem="LP1-vo-Mq0" firstAttribute="trailing" secondItem="IhA-q6-xNc" secondAttribute="trailing" constant="13" id="Ef2-7N-8zl"/>
                             <constraint firstItem="WDP-Ym-4WQ" firstAttribute="leading" secondItem="LP1-vo-Mq0" secondAttribute="leading" constant="13" id="Eik-6a-G1w"/>
                             <constraint firstItem="IhA-q6-xNc" firstAttribute="leading" secondItem="LP1-vo-Mq0" secondAttribute="leading" constant="13" id="Fvm-U4-IPU"/>
                             <constraint firstItem="RJS-ax-bsd" firstAttribute="top" secondItem="WDP-Ym-4WQ" secondAttribute="bottom" constant="13" id="HLV-dO-MWj"/>
                             <constraint firstItem="LP1-vo-Mq0" firstAttribute="trailing" secondItem="WDP-Ym-4WQ" secondAttribute="trailing" constant="13" id="PYA-6M-gBB"/>
                             <constraint firstItem="LP1-vo-Mq0" firstAttribute="trailing" secondItem="rpo-i9-hA6" secondAttribute="trailing" constant="13" id="RRX-6Y-IV2"/>
+                            <constraint firstItem="MhO-Sk-sbC" firstAttribute="width" secondItem="alf-Fl-ZGS" secondAttribute="width" multiplier="0.4" id="Sp3-ol-M3L"/>
                             <constraint firstItem="rpo-i9-hA6" firstAttribute="top" secondItem="RJS-ax-bsd" secondAttribute="bottom" constant="13" id="akc-aM-WY5"/>
+                            <constraint firstItem="MhO-Sk-sbC" firstAttribute="centerX" secondItem="alf-Fl-ZGS" secondAttribute="centerX" id="bl0-cc-PK6"/>
                             <constraint firstItem="rpo-i9-hA6" firstAttribute="leading" secondItem="LP1-vo-Mq0" secondAttribute="leading" constant="13" id="e7f-LN-Z4G"/>
                             <constraint firstItem="LP1-vo-Mq0" firstAttribute="trailing" secondItem="RJS-ax-bsd" secondAttribute="trailing" constant="13" id="hHD-LE-S73"/>
                             <constraint firstItem="LP1-vo-Mq0" firstAttribute="trailing" secondItem="CML-xl-YvA" secondAttribute="trailing" constant="13" id="hgV-dM-iuO"/>
                             <constraint firstItem="IhA-q6-xNc" firstAttribute="centerX" secondItem="alf-Fl-ZGS" secondAttribute="centerX" id="iq3-1f-VQI"/>
+                            <constraint firstItem="MhO-Sk-sbC" firstAttribute="centerY" secondItem="alf-Fl-ZGS" secondAttribute="centerY" multiplier="0.4" id="kC2-Em-YHh"/>
                             <constraint firstItem="WDP-Ym-4WQ" firstAttribute="top" secondItem="IhA-q6-xNc" secondAttribute="bottom" constant="13" id="nKP-zY-zPN"/>
-                            <constraint firstItem="IhA-q6-xNc" firstAttribute="centerY" secondItem="alf-Fl-ZGS" secondAttribute="centerY" multiplier="0.62" id="nxK-L7-O5C"/>
                             <constraint firstItem="CML-xl-YvA" firstAttribute="top" secondItem="rpo-i9-hA6" secondAttribute="bottom" constant="13" id="xrm-6e-ktw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LP1-vo-Mq0"/>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="CML-xl-YvA" id="mAl-1T-gPt"/>
-                        <outlet property="emailTextField" destination="IhA-q6-xNc" id="O7b-Bu-M5O"/>
-                        <outlet property="nameTextField" destination="WDP-Ym-4WQ" id="W9T-oN-PSO"/>
+                        <outlet property="emailTextField" destination="WDP-Ym-4WQ" id="TZq-4l-UhL"/>
+                        <outlet property="nameTextField" destination="IhA-q6-xNc" id="Q4W-UA-EBg"/>
                         <outlet property="passwordTextField" destination="RJS-ax-bsd" id="7x8-Yh-TSs"/>
+                        <outlet property="profileImageView" destination="MhO-Sk-sbC" id="8k3-7z-ckC"/>
                         <outlet property="signUpButton" destination="rpo-i9-hA6" id="HWx-Uc-afL"/>
                     </connections>
                 </viewController>
@@ -125,4 +142,7 @@
             <point key="canvasLocation" x="359" y="-170"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add_a_photo_black" width="48" height="48"/>
+    </resources>
 </document>

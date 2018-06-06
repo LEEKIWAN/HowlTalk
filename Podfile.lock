@@ -164,6 +164,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/RemoteConfig
+  - Firebase/Storage
   - FirebaseUI
   - SwiftyBeaver
   - TextFieldEffects
@@ -235,6 +236,6 @@ SPEC CHECKSUMS:
   TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
 
-PODFILE CHECKSUM: ff2f256a5525c98db1cf24b1c55226be8190bc6e
+PODFILE CHECKSUM: cbeaaa98dc1b029e1188a40cb4c88f3031ae2f8c
 
 COCOAPODS: 1.5.0
