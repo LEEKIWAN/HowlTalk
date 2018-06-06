@@ -9,6 +9,8 @@ target 'HowlTalk' do
   pod 'SwiftyBeaver'
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
+  pod 'Firebase/Database'
+  pod 'FirebaseUI'
 #  pod 'SnapKit', '~> 4.0.0'
   pod 'TextFieldEffects'
 end

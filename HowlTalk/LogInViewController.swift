@@ -63,6 +63,16 @@ class ViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-
+    
+    //MARK: - Event
+    @IBAction func onLogInTouched(_ sender: UIButton) {
+  
+    }
+    
+    @IBAction func onSignUpTouched(_ sender: UIButton) {
+        let storyBoard = UIStoryboard(name: "SignUpViewController", bundle: nil)
+        let signUpViewController = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController")
+        self.present(signUpViewController, animated: true, completion: nil)
+    }
 }
 
