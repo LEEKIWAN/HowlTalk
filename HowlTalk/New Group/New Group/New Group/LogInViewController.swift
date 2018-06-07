@@ -39,13 +39,19 @@ class ViewController: UIViewController {
             self.displayWelcome()
             self.setThemeColor()
         }
+        
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                let storyBoard = UIStoryboard(name: "MainViewController", bundle: nil)
+                let signUpViewController = storyBoard.instantiateViewController(withIdentifier: "MainViewController")
+                self.present(signUpViewController, animated: true, completion: nil)
+            }
+        }
     }
 
     func setThemeColor() {
         let themeColor = remoteConfig["themeColor"].stringValue
-        
         signInButton.backgroundColor = UIColor(hexString: themeColor!)
-
         logInButton.backgroundColor = UIColor(hexString: themeColor!)
         
     }
@@ -66,7 +72,12 @@ class ViewController: UIViewController {
     
     //MARK: - Event
     @IBAction func onLogInTouched(_ sender: UIButton) {
-  
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
+            if let error = error {
+                UIAlertController.showError(viewController: self, title: "Error", message: error.localizedDescription)
+            }
+            
+        }
     }
     
     @IBAction func onSignUpTouched(_ sender: UIButton) {
