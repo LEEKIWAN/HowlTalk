@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import TextFieldEffects
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     var remoteConfig: RemoteConfig!
     
@@ -40,13 +40,13 @@ class ViewController: UIViewController {
             self.setThemeColor()
         }
         
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user != nil {
-                let storyBoard = UIStoryboard(name: "MainViewController", bundle: nil)
-                let signUpViewController = storyBoard.instantiateViewController(withIdentifier: "MainViewController")
-                self.present(signUpViewController, animated: true, completion: nil)
-            }
-        }
+//        Auth.auth().addStateDidChangeListener { (auth, user) in
+//            if user != nil {
+//                let storyBoard = UIStoryboard(name: "MainViewController", bundle: nil)
+//                let signUpViewController = storyBoard.instantiateViewController(withIdentifier: "MainViewController")
+//                self.present(signUpViewController, animated: true, completion: nil)
+//            }
+//        }
     }
 
     func setThemeColor() {

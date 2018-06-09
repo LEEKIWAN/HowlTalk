@@ -10,14 +10,27 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Launch Screen-->
+        <!--View Controller-->
         <scene sceneID="uJM-HY-X2S">
             <objects>
-                <viewController id="8H1-Ch-QnL" customClass="LaunchScreen" customModule="HowlTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchScreen" id="8H1-Ch-QnL" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AFl-1k-wOf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.67450980392156867" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteApple" translatesAutoresizingMaskIntoConstraints="NO" id="ddK-tJ-qrp">
+                                <rect key="frame" x="142.5" y="288.5" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="EQk-f2-L5B"/>
+                                    <constraint firstAttribute="height" constant="90" id="WMQ-0u-jmC"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ddK-tJ-qrp" firstAttribute="centerY" secondItem="AFl-1k-wOf" secondAttribute="centerY" id="e4y-Yt-1kh"/>
+                            <constraint firstItem="ddK-tJ-qrp" firstAttribute="centerX" secondItem="AFl-1k-wOf" secondAttribute="centerX" id="xZY-Lg-Gaa"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iVP-Az-dUt"/>
                     </view>
                 </viewController>
@@ -26,4 +39,7 @@
             <point key="canvasLocation" x="-1007" y="388"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="whiteApple" width="120" height="120"/>
+    </resources>
 </document>

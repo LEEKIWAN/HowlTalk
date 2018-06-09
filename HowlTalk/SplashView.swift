@@ -9,7 +9,7 @@
 import UIKit
 import SKSplashView
 
-class LaunchScreen: UIViewController, SKSplashDelegate {
+class SplashView: UIViewController, SKSplashDelegate {
 
     var splashView: SKSplashView?
     
@@ -20,22 +20,29 @@ class LaunchScreen: UIViewController, SKSplashDelegate {
     
     func splashAnimation() {
         let splashIcon = SKSplashIcon(image: UIImage(named: "whiteApple"), animationType: .bounce)
-        splashIcon?.iconSize = CGSize(width: 100, height: 100)
+        splashIcon?.iconSize = CGSize(width: 90, height: 90)
         self.splashView = SKSplashView(splashIcon: splashIcon, animationType: .none)
         self.view.addSubview(self.splashView!)
         
         self.splashView?.delegate = self
-        self.splashView?.animationDuration = 3
+        self.splashView?.animationDuration = 2
         self.splashView?.startAnimation()
     }
     
     
     func splashViewDidEndAnimating(_ splashView: SKSplashView!) {
-        log.debug("asdf")
+        
+        let storyBoard = UIStoryboard(name: "LogInViewController", bundle: nil)
+        let logInViewController = storyBoard.instantiateViewController(withIdentifier: "LogInViewController")
+        UIApplication.shared.keyWindow?.rootViewController = logInViewController
+        
+        
+        self.dismiss(animated: false)
     }
     
     func splashView(_ splashView: SKSplashView!, didBeginAnimatingWithDuration duration: Float) {
-        log.debug("begin")
+        
+        
     }
 
 }
