@@ -9,52 +9,33 @@
 import UIKit
 import SKSplashView
 
-class LaunchScreen: UIViewController {
+class LaunchScreen: UIViewController, SKSplashDelegate {
 
     var splashView: SKSplashView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        log.debug("Asdf")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.splashAnimation()
     }
     
-    func twitterSplash() {
-        let imageView = UIImageView(frame: self.view.frame)
-        imageView.image = UIImage(named: "twitter background.png")
-        self.view.addSubview(imageView)
-        
-        self.splashIcon = SKSplashIcon(image: UIImage(named: "twitter icon.png"), animationType: .bounce)
-        
-        
-        SKSplashIcon.in
-        //        self.splashIcon.setIconAnimationType(.bounce)
-        let twitterColor = UIColor.blue
-        
-        self.splashView = SKSplashView(splashIcon: self.splashIcon, animationType: .none)
-        self.splashView?.delegate = self
-        
-        self.splashView?.backgroundColor = twitterColor
-        
-        self.splashView?.animationDuration = 3
-        
+    func splashAnimation() {
+        let splashIcon = SKSplashIcon(image: UIImage(named: "whiteApple"), animationType: .bounce)
+        splashIcon?.iconSize = CGSize(width: 100, height: 100)
+        self.splashView = SKSplashView(splashIcon: splashIcon, animationType: .none)
         self.view.addSubview(self.splashView!)
         
+        self.splashView?.delegate = self
+        self.splashView?.animationDuration = 3
         self.splashView?.startAnimation()
-        
     }
     
+    
     func splashViewDidEndAnimating(_ splashView: SKSplashView!) {
-        
+        log.debug("asdf")
     }
     
     func splashView(_ splashView: SKSplashView!, didBeginAnimatingWithDuration duration: Float) {
-        
+        log.debug("begin")
     }
 
 }

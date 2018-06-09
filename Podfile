@@ -6,6 +6,7 @@ target 'HowlTalk' do
   use_frameworks!
   # Pods for HowlTalk
   
+  pod 'SwiftyBeaver'
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Database'
