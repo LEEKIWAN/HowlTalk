@@ -12,7 +12,7 @@ target 'HowlTalk' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'FirebaseUI'
-#  pod 'SnapKit', '~> 4.0.0'
+  pod 'FBSDKLoginKit'
   pod 'TextFieldEffects'
   pod 'SKSplashView'
 end

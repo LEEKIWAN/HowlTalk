@@ -8,23 +8,26 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
+//FBSDKCoreKit/FBSDKCoreKit.h
 
+import FBSDKCoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKGraphRequestConnectionDelegate {
 
     var window: UIWindow?
-
-//    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//
-//        FirebaseApp.configure()
-//        return true
-//    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         FirebaseApp.configure()
 
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
+        
         return true
     }
 
@@ -50,6 +53,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+    
+        
+        return facebookDidHandle || googleDidHandle
+    }
+    
+    
+    
+    //MARK:- GIDSignInDelegate
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        // ...
+        if let error = error {
+            log.error(error.localizedDescription)
+            return
+        }
+        
+        
+        let thumbSize = CGSize.init(width: 500, height: 500)
+        let userID = user!.userID
+        let idToken = user!.authentication.idToken
+        let accessToken = user!.authentication.accessToken
+        let name = user.profile.name
+        let email = user.profile.email
+        var imageURL:URL? = nil
+        
+        if GIDSignIn.sharedInstance().currentUser.profile.hasImage {
+            let dimension = round(thumbSize.width * UIScreen.main.scale)
+            imageURL = user.profile.imageURL(withDimension: UInt(dimension))
+        }
+        
+        print("AppDelegate ===> [1] ID : \(String(describing: userID)) | [2] idToken : \(String(describing: idToken)) | [3] accessToken : \(String(describing: accessToken)) | [4] name : \(String(describing: name)) | [5] email : \(String(describing: email)) [6] imageURL : \(String(describing: imageURL))")
+        
+        PreferenceManager.userID = user!.userID
+        PreferenceManager.userName = user!.profile.name
+        PreferenceManager.userEmail = user!.profile.email
+        PreferenceManager.loginMethod = SocialLoginMethod.Google.rawValue
+        
+        
+        let storyBoard = UIStoryboard(name: "MainViewController", bundle: nil)
+        let mainViewController = storyBoard.instantiateViewController(withIdentifier: "MainViewController")
+        UIApplication.shared.keyWindow?.rootViewController = mainViewController
+        
+        
+        
+    }
+    
+    func requestFacebookUserInfo() {
+        if FBSDKAccessToken.current() != nil {
+            let requestUserInfo = FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id,name,link, picture, email, gender, birthday ,location ,devices ,currency, education"])
+            let connection = FBSDKGraphRequestConnection()
+            
+            connection.add(requestUserInfo, completionHandler: { (connection, result, error) in
+                if let userData = result as? [String:AnyObject] {
+                    
+                    PreferenceManager.userID = userData["id"] as? String
+                    PreferenceManager.userEmail = userData["email"] as? String
+                    PreferenceManager.userName = userData["name"] as? String
+                    PreferenceManager.loginMethod = SocialLoginMethod.Facebook.rawValue
+ 
+                    
+//                    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                }
+            })
+            connection.delegate = self
+            connection.start()
+        }
+//        else {
+//            self.moveToName(menuName: .Login)
+//        }
+    }
+    
+    
 }
 

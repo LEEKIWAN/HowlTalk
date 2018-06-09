@@ -12,6 +12,7 @@
 		8318C9E420C4037300144C4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8318C9E320C4037300144C4D /* GoogleService-Info.plist */; };
 		8318C9E620C4089800144C4D /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */; };
 		831EC09B20CB6D17007AED10 /* SplashView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 831EC09A20CB6D17007AED10 /* SplashView.storyboard */; };
+		831EC09D20CC0F84007AED10 /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EC09C20CC0F84007AED10 /* PreferenceManager.swift */; };
 		8337ECE420C6C60D00CB2C2E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */; };
 		8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */; };
 		8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */; };
@@ -25,6 +26,7 @@
 		835952D320B3B0C500E1ECDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835952D220B3B0C500E1ECDA /* Assets.xcassets */; };
 		835952D620B3B0C500E1ECDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835952D420B3B0C500E1ECDA /* LaunchScreen.storyboard */; };
 		83B9CB2220CAD9A600E73F79 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9CB2120CAD9A600E73F79 /* SplashView.swift */; };
+		83E7D6EC20CC12EF00E5C379 /* SocialLoginMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,7 @@
 		8318C9E320C4037300144C4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		831EC09A20CB6D17007AED10 /* SplashView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashView.storyboard; sourceTree = "<group>"; };
+		831EC09C20CC0F84007AED10 /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
 		8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		835952D520B3B0C500E1ECDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835952D720B3B0C500E1ECDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83B9CB2120CAD9A600E73F79 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLoginMethod.swift; sourceTree = "<group>"; };
 		970F5A9EFFE4AFAD66242517 /* Pods-HowlTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,10 +79,12 @@
 		8318C9DE20C3FB3500144C4D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				83E7D6EA20CC12D900E5C379 /* Enum */,
 				8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */,
 				8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */,
 				8318C9E120C3FD7D00144C4D /* Logger.swift */,
 				8350372420C94BB200CCE958 /* UIAlertController.swift */,
+				831EC09C20CC0F84007AED10 /* PreferenceManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -139,6 +145,14 @@
 				8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */,
 			);
 			path = HowlTalk;
+			sourceTree = "<group>";
+		};
+		83E7D6EA20CC12D900E5C379 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		AD79E6DB0AAD463A302169AE /* Pods */ = {
@@ -275,6 +289,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SKSplashView/SKSplashView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
@@ -297,6 +312,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKSplashView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
@@ -337,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				831EC09D20CC0F84007AED10 /* PreferenceManager.swift in Sources */,
 				8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */,
 				8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */,
 				83B9CB2220CAD9A600E73F79 /* SplashView.swift in Sources */,
@@ -345,6 +362,7 @@
 				835952CC20B3B0C400E1ECDA /* AppDelegate.swift in Sources */,
 				8318C9E220C3FD7D00144C4D /* Logger.swift in Sources */,
 				8337ECE420C6C60D00CB2C2E /* UIColor+Extension.swift in Sources */,
+				83E7D6EC20CC12EF00E5C379 /* SocialLoginMethod.swift in Sources */,
 				8347056D20C94F1400C5B44E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,10 +511,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77F6X5R2CN;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -512,10 +527,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77F6X5R2CN;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

@@ -14,14 +14,12 @@ import FirebaseStorage
 
 class SignUpViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var emailTextField: HoshiTextField!
     @IBOutlet weak var nameTextField: HoshiTextField!
     @IBOutlet weak var passwordTextField: HoshiTextField!
     
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    
     
     let storageRef = Storage.storage().reference()
     var databaseRef = Database.database().reference()
@@ -32,15 +30,6 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     func setEvent() {
-        profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onProfileImageTouched)))
-    }
-    
-  
-    
-    //MARK: - UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        profileImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        dismiss(animated: true, completion: nil)
     }
     
     //MARK: - event
@@ -70,24 +59,7 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate, UI
                     
                     // DB
                     self.databaseRef.child("USER_TB").child((result?.user.uid)!).setValue(["name" : self.nameTextField.text!])
-                    
-                    // 업로드 이미지
-                    let image = UIImageJPEGRepresentation(self.profileImageView.image!, 0.1)
-                    
-                    // 메타데이터
-                    let metaData = StorageMetadata()
-                    metaData.contentType = "image/jpeg"
-                    
-                    self.storageRef.child("UserProfileImage").child((result?.user.uid)!).putData(image!, metadata: metaData, completion: { (metaData, error) in
-                        if let error = error {
-                            log.error(error)
-                            return
-                        }
-                 
-                        self.databaseRef.child("USER_TB").child((result?.user.uid)!).setValue(["profileImagePath" : metaData?.path!])
-                        
-                        
-                    })
+                   
                 }
         }
     }

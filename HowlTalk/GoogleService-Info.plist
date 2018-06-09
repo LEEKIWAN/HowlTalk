@@ -36,5 +36,27 @@
 	<string>1:570199843462:ios:ff7fae39b4a09929</string>
 	<key>DATABASE_URL</key>
 	<string>https://howltalk-ec471.firebaseio.com</string>
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb2016932788569357</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>2016932788569357</string>
+    <key>FacebookDisplayName</key>
+    <string>HowlTalk</string>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 </dict>
 </plist>
