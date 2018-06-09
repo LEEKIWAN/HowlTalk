@@ -13,7 +13,7 @@ import GoogleSignIn
 import FBSDKLoginKit
 
 
-class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -110,16 +110,16 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
     @IBAction func onFacebookSignInTouched(_ sender: UIButton) {
         facebookLoginManager.logIn(withReadPermissions: ["user_friends","email","user_about_me" ,"user_birthday" ,"user_hometown" ,"user_likes" ,"user_location" ,"user_photos" ,"user_status","user_relationships" ,"user_education_history"], from: self) {
             (result, error) in
-            if error == nil {
-                self.appDelegate.requestFacebookUserInfo()
-            }
-            else{
-                let alertController = UIAlertController(title: "Error", message: error as! String?, preferredStyle: .alert)
+            if let error = error {
+                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 alertController.addAction(defaultAction)
                 
                 self.present(alertController, animated: true, completion: nil)
+                return
             }
+            
+            self.appDelegate.requestFacebookUserInfo()
         }
     }
     
@@ -134,7 +134,19 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        log.debug("fail")
+        
+    }
+ 
+    //MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.isEqual(emailTextField) {
+            passwordTextField.becomeFirstResponder()
+        }
+        else if textField.isEqual(passwordTextField) {
+            self.view.endEditing(true)
+        }
+        
+        return true
     }
     
     

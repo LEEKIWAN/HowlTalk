@@ -34,17 +34,10 @@ class SignUpViewController: UIViewController, UINavigationControllerDelegate, UI
     
     //MARK: - event
     
-    @objc func onProfileImageTouched() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        imagePickerController.sourceType = .photoLibrary
-        self.present(imagePickerController, animated: true, completion: nil)
-    }
-    
     @IBAction func onSignUpTouched(_ sender: UIButton) {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
                 if let error = error {
+                    // 17007 - 등록된 이메일, 17008 - 메일형식 오류, 17026 - 짧은비밀번호 6자리, 17999 - 이메일 또는 비밀번호 잘못됨
                     UIAlertController.showError(viewController: self, title: "Error", message: error.localizedDescription)
                     return
                 }
