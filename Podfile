@@ -6,7 +6,6 @@ target 'HowlTalk' do
   use_frameworks!
   # Pods for HowlTalk
   
-  pod 'SwiftyBeaver'
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Database'
@@ -14,4 +13,5 @@ target 'HowlTalk' do
   pod 'FirebaseUI'
 #  pod 'SnapKit', '~> 4.0.0'
   pod 'TextFieldEffects'
+  pod 'SKSplashView'
 end
