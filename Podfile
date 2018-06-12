@@ -15,4 +15,5 @@ target 'HowlTalk' do
   pod 'FBSDKLoginKit'
   pod 'TextFieldEffects'
   pod 'SKSplashView'
+  pod 'NVActivityIndicatorView'
 end

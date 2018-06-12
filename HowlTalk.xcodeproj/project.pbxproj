@@ -17,6 +17,9 @@
 		8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */; };
 		8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */; };
 		8337ECE920C6C8BD00CB2C2E /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8337ECE820C6C8BD00CB2C2E /* SignUpViewController.storyboard */; };
+		833D3B8920CD19A1006E327B /* MenuName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D3B8820CD19A1006E327B /* MenuName.swift */; };
+		833D3B8B20CD369C006E327B /* PasswordFindViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833D3B8A20CD369C006E327B /* PasswordFindViewController.storyboard */; };
+		833D3B8D20CD36A6006E327B /* PasswordFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D3B8C20CD36A6006E327B /* PasswordFindViewController.swift */; };
 		8347056D20C94F1400C5B44E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347056C20C94F1400C5B44E /* MainViewController.swift */; };
 		8347056F20C94F2000C5B44E /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8347056E20C94F2000C5B44E /* MainViewController.storyboard */; };
 		8350372520C94BB200CCE958 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350372420C94BB200CCE958 /* UIAlertController.swift */; };
@@ -41,6 +44,9 @@
 		8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8337ECE820C6C8BD00CB2C2E /* SignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController.storyboard; sourceTree = "<group>"; };
+		833D3B8820CD19A1006E327B /* MenuName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuName.swift; sourceTree = "<group>"; };
+		833D3B8A20CD369C006E327B /* PasswordFindViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordFindViewController.storyboard; sourceTree = "<group>"; };
+		833D3B8C20CD36A6006E327B /* PasswordFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFindViewController.swift; sourceTree = "<group>"; };
 		8347056C20C94F1400C5B44E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8347056E20C94F2000C5B44E /* MainViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
 		8350372420C94BB200CCE958 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 				8347056E20C94F2000C5B44E /* MainViewController.storyboard */,
 				835952CF20B3B0C400E1ECDA /* LogInViewController.storyboard */,
 				8337ECE820C6C8BD00CB2C2E /* SignUpViewController.storyboard */,
+				833D3B8A20CD369C006E327B /* PasswordFindViewController.storyboard */,
 			);
 			name = View;
 			path = "New Group/View";
@@ -106,6 +113,7 @@
 				8347056C20C94F1400C5B44E /* MainViewController.swift */,
 				835952CD20B3B0C400E1ECDA /* LogInViewController.swift */,
 				8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */,
+				833D3B8C20CD36A6006E327B /* PasswordFindViewController.swift */,
 			);
 			name = Controller;
 			path = "New Group/New Group/New Group";
@@ -132,8 +140,8 @@
 		835952CA20B3B0C400E1ECDA /* HowlTalk */ = {
 			isa = PBXGroup;
 			children = (
-				8318C9DE20C3FB3500144C4D /* Common */,
 				835952CB20B3B0C400E1ECDA /* AppDelegate.swift */,
+				8318C9DE20C3FB3500144C4D /* Common */,
 				8347056A20C7FE9600C5B44E /* View */,
 				8347056B20C7FE9600C5B44E /* Controller */,
 				835952D220B3B0C500E1ECDA /* Assets.xcassets */,
@@ -151,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */,
+				833D3B8820CD19A1006E327B /* MenuName.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -234,6 +243,7 @@
 				835952D120B3B0C400E1ECDA /* LogInViewController.storyboard in Resources */,
 				8337ECE920C6C8BD00CB2C2E /* SignUpViewController.storyboard in Resources */,
 				8347056F20C94F2000C5B44E /* MainViewController.storyboard in Resources */,
+				833D3B8B20CD369C006E327B /* PasswordFindViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +296,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SKSplashView/SKSplashView.framework",
@@ -309,6 +320,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKSplashView.framework",
@@ -356,6 +368,8 @@
 				831EC09D20CC0F84007AED10 /* PreferenceManager.swift in Sources */,
 				8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */,
 				8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */,
+				833D3B8D20CD36A6006E327B /* PasswordFindViewController.swift in Sources */,
+				833D3B8920CD19A1006E327B /* MenuName.swift in Sources */,
 				83B9CB2220CAD9A600E73F79 /* SplashView.swift in Sources */,
 				835952CE20B3B0C400E1ECDA /* LogInViewController.swift in Sources */,
 				8350372520C94BB200CCE958 /* UIAlertController.swift in Sources */,

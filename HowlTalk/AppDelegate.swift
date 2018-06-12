@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import GoogleSignIn
-//FBSDKCoreKit/FBSDKCoreKit.h
 
 import FBSDKCoreKit
 
@@ -17,9 +16,12 @@ import FBSDKCoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKGraphRequestConnectionDelegate {
 
     var window: UIWindow?
+    var currentView: String!
+    var databaseRef = Database.database().reference()
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        
+    
         FirebaseApp.configure()
 
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
@@ -54,11 +56,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-//        let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
-//        let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
     
-        return GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
-//        return facebookDidHandle || googleDidHandle
+        return facebookDidHandle || googleDidHandle
     }
     
     
@@ -68,8 +69,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         // ...
         if let error = error {
             log.error(error.localizedDescription)
+            self.moveToName(menuName: .Login)
             return
         }
+        
+        let authentication = user.authentication
+        let credential = GoogleAuthProvider.credential(withIDToken: (authentication?.idToken)!, accessToken: (authentication?.accessToken)!)
+        
+        var userUID: String?
+        
+        Auth.auth().signInAndRetrieveData(with: credential) { (result, error) in
+            if let error = error {
+                log.error(error.localizedDescription)
+                return
+            }
+            userUID = result?.user.uid
+            PreferenceManager.userUID = userUID
+        }
+        
         
         
         let thumbSize = CGSize.init(width: 500, height: 500)
@@ -90,15 +107,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         PreferenceManager.userID = user!.userID
         PreferenceManager.userName = user!.profile.name
         PreferenceManager.userEmail = user!.profile.email
+        PreferenceManager.profileImageURL = imageURL?.absoluteString
         PreferenceManager.loginMethod = SocialLoginMethod.Google.rawValue
         
-        
-        let storyBoard = UIStoryboard(name: "MainViewController", bundle: nil)
-        let mainViewController = storyBoard.instantiateViewController(withIdentifier: "MainViewController")
-        UIApplication.shared.keyWindow?.rootViewController = mainViewController
+        self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : user!.userID, "userName" : user!.profile.name, "userEmail" : user!.profile.email, "profileImageURL" : imageURL?.absoluteString])
         
         
-        
+        self.moveToName(menuName: .Main)
     }
     
     func requestFacebookUserInfo() {
@@ -107,25 +122,95 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
             let connection = FBSDKGraphRequestConnection()
             
             connection.add(requestUserInfo, completionHandler: { (connection, result, error) in
+                if let error = error {
+                    log.error(error.localizedDescription)
+                    self.moveToName(menuName: .Login)
+                    return
+                }
+                
+                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                
+                var userUID: String?
+                Auth.auth().signInAndRetrieveData(with: credential) { (result, error) in
+                    if let error = error {
+                        log.error(error.localizedDescription)
+                        return
+                    }
+                    userUID = result?.user.uid
+                    PreferenceManager.userUID = result?.user.uid
+                }
+                
+                
                 if let userData = result as? [String:AnyObject] {
                     
-                    PreferenceManager.userID = userData["id"] as? String
-                    PreferenceManager.userEmail = userData["email"] as? String
-                    PreferenceManager.userName = userData["name"] as? String
-                    PreferenceManager.loginMethod = SocialLoginMethod.Facebook.rawValue
- 
+                    let userID = userData["id"] as? String
+                    let picture = userData["picture"] as! NSDictionary
+                    let pictureData = picture.object(forKey: "data") as! NSDictionary
+                    let imageURL = pictureData.object(forKey: "url") as! String
+                    let userEmail  = userData["email"] as? String
+                    let userName = userData["name"] as? String
                     
-//                    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                    PreferenceManager.userID = userID
+                    PreferenceManager.userEmail = userEmail
+                    PreferenceManager.userName = userName
+                    PreferenceManager.profileImageURL = imageURL
+                    PreferenceManager.loginMethod = SocialLoginMethod.Facebook.rawValue
+                    
+                    print("FaceBook ===> \(userData)")
+                    
+                    self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : userID, "userName" : userName, "userEmail" : userEmail, "profileImageURL" : imageURL])
                 }
             })
             connection.delegate = self
             connection.start()
+            
+            self.moveToName(menuName: .Main)
         }
-//        else {
-//            self.moveToName(menuName: .Login)
-//        }
+    }
+    
+    func directSignIn(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                self.moveToName(menuName: .Login)
+                return
+            }
+            if let user = user {
+                PreferenceManager.userUID = user.user.uid
+                PreferenceManager.userEmail = user.user.email
+                PreferenceManager.userPassword = password
+                PreferenceManager.loginMethod = SocialLoginMethod.Direct.rawValue
+                
+                self.moveToName(menuName: .Main)
+            }
+        }
     }
     
     
+    func moveToName(menuName: MenuName) {
+        if menuName == MenuName.Login && self.currentView != "LoginViewController" {
+            self.currentView = "LoginViewController"
+            let storyboard = UIStoryboard.init(name: "LogInViewController", bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LogInViewController")
+            self.window?.rootViewController = loginViewController
+        }
+        else if menuName == MenuName.Main && self.currentView != "MainViewController" {
+            self.currentView = "MainViewController"
+            let storyboard = UIStoryboard.init(name: "MainViewController", bundle: nil)
+            let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController")
+            self.window?.rootViewController = mainViewController
+        }
+        else if menuName == MenuName.Greeting {
+            
+//            let navigationViewController = UINavigationController.init()
+//            let greetingsView = UIStoryboard.init(name: "GreetingsView", bundle: nil)
+//            let greetingsViewController = greetingsView.instantiateViewController(withIdentifier: "GreetingsView") as! GreetingsViewController
+//            greetingsViewController.isGreeting = true
+//
+//            navigationViewController.viewControllers = [greetingsViewController]
+//            self.window?.rootViewController = navigationViewController
+        }
+        
+    }
 }
 

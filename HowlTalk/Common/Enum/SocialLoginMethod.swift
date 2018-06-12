@@ -9,8 +9,8 @@
 import UIKit
 
 
-enum SocialLoginMethod: Int {
-    case Direct
-    case Facebook
-    case Google
+enum SocialLoginMethod: String {
+    case Direct = "DIRECT"
+    case Facebook = "FACEBOOK"
+    case Google = "GOOGLE"
 }

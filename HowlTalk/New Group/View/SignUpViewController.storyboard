@@ -25,12 +25,15 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SLX-Rs-oQH" userLabel="Contents View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteApple" translatesAutoresizingMaskIntoConstraints="NO" id="VKa-pG-RqY">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteApple" translatesAutoresizingMaskIntoConstraints="NO" id="VKa-pG-RqY">
                                                 <rect key="frame" x="137.5" y="80" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="G94-6u-Jcl"/>
                                                     <constraint firstAttribute="width" secondItem="VKa-pG-RqY" secondAttribute="height" multiplier="1:1" id="KDw-U9-4TV"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="EkF-xi-qHk" appends="YES" id="wrD-4v-Crj"/>
+                                                </connections>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qzS-aG-5au" customClass="HoshiTextField" customModule="TextFieldEffects">
                                                 <rect key="frame" x="20" y="220" width="335" height="50"/>
@@ -39,7 +42,7 @@
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                <textInputTraits key="textInputTraits"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
                                                         <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,7 +59,7 @@
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
                                                         <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -114,6 +117,7 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="pVl-3X-6kI" secondAttribute="trailing" constant="20" id="100-0U-Agw"/>
                                             <constraint firstItem="5ch-PP-MQ2" firstAttribute="leading" secondItem="SLX-Rs-oQH" secondAttribute="leading" constant="20" id="5ok-zL-l0E"/>
@@ -133,8 +137,12 @@
                                             <constraint firstItem="pVl-3X-6kI" firstAttribute="leading" secondItem="SLX-Rs-oQH" secondAttribute="leading" constant="20" id="xbn-87-U4N"/>
                                             <constraint firstItem="pVl-3X-6kI" firstAttribute="top" secondItem="5ch-PP-MQ2" secondAttribute="bottom" constant="20" id="yZV-Qj-XFb"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="EkF-xi-qHk" appends="YES" id="Hl7-iN-ntD"/>
+                                        </connections>
                                     </view>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="SLX-Rs-oQH" secondAttribute="bottom" id="8lT-kx-WJn"/>
                                     <constraint firstItem="SLX-Rs-oQH" firstAttribute="height" secondItem="uq1-OG-iIF" secondAttribute="height" id="DRA-7t-8xr"/>
@@ -146,6 +154,7 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="uq1-OG-iIF" firstAttribute="leading" secondItem="m8d-Dl-crI" secondAttribute="leading" id="3Cu-4H-sqg"/>
                             <constraint firstItem="m8d-Dl-crI" firstAttribute="trailing" secondItem="uq1-OG-iIF" secondAttribute="trailing" id="8HP-XO-p5U"/>
@@ -156,13 +165,20 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="pVl-3X-6kI" id="5Zo-Rc-Qni"/>
+                        <outlet property="contentsView" destination="SLX-Rs-oQH" id="A7h-5K-Y4W"/>
                         <outlet property="emailTextField" destination="ly0-Ei-6KP" id="XkS-E3-QLI"/>
                         <outlet property="nameTextField" destination="qzS-aG-5au" id="Nyx-8P-tUE"/>
                         <outlet property="passwordTextField" destination="uY0-Xc-0OI" id="c27-my-g7Z"/>
+                        <outlet property="scrollView" destination="uq1-OG-iIF" id="yhL-EM-Xpf"/>
                         <outlet property="signUpButton" destination="5ch-PP-MQ2" id="iEY-R9-gQg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QFE-YS-xpV" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="EkF-xi-qHk">
+                    <connections>
+                        <action selector="onBcakgroundTouched:" destination="M4k-Bs-kac" id="Epx-bv-l3S"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-282" y="-177"/>
         </scene>

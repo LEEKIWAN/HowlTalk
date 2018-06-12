@@ -8,9 +8,13 @@
 
 import UIKit
 import SKSplashView
+import GoogleSignIn
+import FBSDKLoginKit
 
 class SplashView: UIViewController, SKSplashDelegate {
-
+    
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     var splashView: SKSplashView?
     
     override func viewDidLoad() {
@@ -32,12 +36,28 @@ class SplashView: UIViewController, SKSplashDelegate {
     
     func splashViewDidEndAnimating(_ splashView: SKSplashView!) {
         
-        let storyBoard = UIStoryboard(name: "LogInViewController", bundle: nil)
-        let logInViewController = storyBoard.instantiateViewController(withIdentifier: "LogInViewController")
-        UIApplication.shared.keyWindow?.rootViewController = logInViewController
-        
-        
-        self.dismiss(animated: false)
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            appDelegate.moveToName(menuName: .Main)
+            GIDSignIn.sharedInstance().signInSilently()
+            return
+        }
+
+        else if FBSDKAccessToken.currentAccessTokenIsActive() {
+            appDelegate.moveToName(menuName: .Main)
+            appDelegate.requestFacebookUserInfo()
+            return
+        }
+        else if PreferenceManager.loginMethod == SocialLoginMethod.Direct.rawValue {
+            appDelegate.moveToName(menuName: .Main)
+            print("\(PreferenceManager.userEmail) \(PreferenceManager.userPassword)")
+            appDelegate.directSignIn(email: PreferenceManager.userEmail!, password: PreferenceManager.userPassword!)
+            return
+        }
+        else {
+            self.dismiss(animated: false, completion: nil)
+            appDelegate.moveToName(menuName: .Login)
+            
+        }
     }
     
     func splashView(_ splashView: SKSplashView!, didBeginAnimatingWithDuration duration: Float) {

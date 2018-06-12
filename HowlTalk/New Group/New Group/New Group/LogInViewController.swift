@@ -11,14 +11,20 @@ import Firebase
 import TextFieldEffects
 import GoogleSignIn
 import FBSDKLoginKit
+import NVActivityIndicatorView
 
 
-class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
+class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate, NVActivityIndicatorViewable {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var remoteConfig: RemoteConfig! = RemoteConfig.remoteConfig()
+    
     let facebookLoginManager = FBSDKLoginManager()
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var contentsView: UIView!
     
     
     @IBOutlet weak var emailTextField: HoshiTextField!
@@ -31,27 +37,31 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
     override func viewDidLoad() {
         super.viewDidLoad()
         self.remoteConfigFetch()
-        
         GIDSignIn.sharedInstance().uiDelegate = self
-//        facebookSignInButton.delegate = self
-        
-        
-        if FBSDKAccessToken.currentAccessTokenIsActive() {
-            
-        }
-        
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+
     
     func remoteConfigFetch() {
         remoteConfig.configSettings = RemoteConfigSettings(developerModeEnabled: true)
         remoteConfig.setDefaults(fromPlist: "RemoteConfigDefaults")
         
+        startAnimating()
+        
         remoteConfig.fetch(withExpirationDuration: TimeInterval(0)) { (status, error) -> Void in
+            
+            self.stopAnimating()
             if status == .success {
                 log.info("Config fetched!")
                 self.remoteConfig.activateFetched()
@@ -88,19 +98,29 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
     }
     
     //MARK: - Event
+    @IBAction func onBackgroundTouched(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func onLogInTouched(_ sender: UIButton) {
-        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
-            if let error = error {
-                UIAlertController.showError(viewController: self, title: "Error", message: error.localizedDescription)
-            }
-            
-        }
+        startAnimating()
+        
+        appDelegate.directSignIn(email: emailTextField.text!, password: passwordTextField.text!)
+        
+        stopAnimating()
     }
     
     @IBAction func onSignUpTouched(_ sender: UIButton) {
         let storyBoard = UIStoryboard(name: "SignUpViewController", bundle: nil)
         let signUpViewController = storyBoard.instantiateViewController(withIdentifier: "SignUpViewController")
-        self.present(signUpViewController, animated: true, completion: nil)
+        self.present(signUpViewController, animated: false, completion: nil)
+    }
+    
+    @IBAction func onForgotPasswordTouched(_ sender: UIButton) {
+        let storyBoard = UIStoryboard(name: "PasswordFindViewController", bundle: nil)
+        let passwordFindViewController = storyBoard.instantiateViewController(withIdentifier: "PasswordFindViewController")
+        self.present(passwordFindViewController, animated: false, completion: nil)
+        
     }
     
     @IBAction func onGoogleSignInTouched(_ sender: UIButton) {
@@ -108,7 +128,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
     }
     
     @IBAction func onFacebookSignInTouched(_ sender: UIButton) {
-        facebookLoginManager.logIn(withReadPermissions: ["user_friends","email","user_about_me" ,"user_birthday" ,"user_hometown" ,"user_likes" ,"user_location" ,"user_photos" ,"user_status","user_relationships" ,"user_education_history"], from: self) {
+        facebookLoginManager.logIn(withReadPermissions: ["public_profile", "user_friends","email" ,"user_birthday" ,"user_hometown" ,"user_likes" ,"user_location" ,"user_photos" ,"user_status"], from: self) {
             (result, error) in
             if let error = error {
                 let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -130,7 +150,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
             log.error(error.localizedDescription)
             return
         }
-//        self.appDelegate.requestFacebookUserInfo()
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
@@ -148,7 +167,22 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButt
         
         return true
     }
+
     
+    //MARK: - UIKeyBoardNotification
+    @objc func keyboardWasShown(notification: NSNotification){
+        let keyboardFrame = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        
+        scrollView.contentInset =  UIEdgeInsets.init(top: 0 , left: 0, bottom: keyboardHeight, right: 0)
+        scrollView.scrollIndicatorInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+
+    }
+    
+    @objc func keyboardWillBeHidden(notification: NSNotification){
+        scrollView.contentInset =  UIEdgeInsets.init(top: 0 , left: 0, bottom: 0, right: 0)
+        scrollView.scrollIndicatorInsets = UIEdgeInsets.init(top: 0 , left: 0, bottom: 0, right: 0)
+    }
     
 }
 

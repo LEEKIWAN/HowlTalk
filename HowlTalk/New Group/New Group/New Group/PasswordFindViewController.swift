@@ -1,37 +1,29 @@
 //
-//  SignUpViewController.swift
+//  PasswordFindViewController.swift
 //  HowlTalk
 //
-//  Created by 이기완 on 2018. 6. 5..
-//  Copyright © 2018년 이기완. All rights reserved.
+//  Created by 이기완 on 10/06/2018.
+//  Copyright © 2018 이기완. All rights reserved.
 //
 
 import UIKit
+import Firebase
 import TextFieldEffects
-import FirebaseAuth
-import FirebaseDatabase
-import FirebaseStorage
 import NVActivityIndicatorView
 
-class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVActivityIndicatorViewable {
+class PasswordFindViewController: UIViewController, NVActivityIndicatorViewable {
 
-    @IBOutlet weak var scrollView: UIScrollView!
-    
-    @IBOutlet weak var contentsView: UIView!
     @IBOutlet weak var emailTextField: HoshiTextField!
-    @IBOutlet weak var nameTextField: HoshiTextField!
-    @IBOutlet weak var passwordTextField: HoshiTextField!
     
-    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentsView: UIView!
+    
+    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
-    let storageRef = Storage.storage().reference()
-    var databaseRef = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setEvent()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,59 +36,44 @@ class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVAct
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-  
-    
-    
-    func setEvent() {
-    }
     
     //MARK: - event
-    
-    @IBAction func onBcakgroundTouched(_ sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
-    
-    @IBAction func onSignUpTouched(_ sender: UIButton) {
+    @IBAction func onSubmitTouched(_ sender: UIButton) {
         startAnimating()
         
-        Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
+        Auth.auth().sendPasswordReset(withEmail: emailTextField.text!) { (error) in
             self.stopAnimating()
+            
             if let error = error {
-                // 17007 - 등록된 이메일, 17008 - 메일형식 오류, 17026 - 짧은비밀번호 6자리, 17999 - 이메일 또는 비밀번호 잘못됨
-                UIAlertController.showError(viewController: self, title: "Error", message: error.localizedDescription)
+                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.present(alertController, animated: true, completion: nil)
                 return
             }
-            if result != nil {
-                let alertController = UIAlertController(title: "회원가입", message: "회원가입이 완료되었습니다.", preferredStyle: .alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: { (alertAction) in
-                    self.dismiss(animated: true, completion: nil)
-                })
-                
-                alertController.addAction(defaultAction)
-                self.present(alertController, animated: true, completion: nil)
-                
-                // DB
-                self.databaseRef.child("USER_TB").child((result?.user.uid)!).setValue(["name" : self.nameTextField.text!])
-               
-            }
             
+            let alert = UIAlertController(title: "비밀번호", message: "해당 이메일주소로 비밀번호 재설정 메일을 보내드렸습니다. 이메일 재설정 해주시길 바랍니다.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "확인", style: UIAlertActionStyle.default, handler: { (alertAction) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
         }
+    }
+
+    @IBAction func onBackgroundTouched(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     @IBAction func onCancelTouched(_ sender: UIButton) {
         self.dismiss(animated: false, completion: nil)
     }
     
-    
-    
     //MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.isEqual(emailTextField) {
-            passwordTextField.becomeFirstResponder()
-        }
-        else if textField.isEqual(passwordTextField) {
-            self.view.endEditing(true)
-        }
+        self.view.endEditing(true)
         
         return true
     }
@@ -116,4 +93,6 @@ class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVAct
         scrollView.contentInset =  UIEdgeInsets.init(top: 0 , left: 0, bottom: 0, right: 0)
         scrollView.scrollIndicatorInsets = UIEdgeInsets.init(top: 0 , left: 0, bottom: 0, right: 0)
     }
+    
 }
+

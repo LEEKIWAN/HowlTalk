@@ -63,6 +63,16 @@ class PreferenceManager: NSObject {
         }
     }
     
+    class var profileImageURL: String! {
+        get{
+            return UserDefaults.standard.string(forKey: "profileImageURL")
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "profileImageURL")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
     class var deviceToken: String! {
         get{
             return UserDefaults.standard.string(forKey: "deviceToken")
@@ -93,9 +103,9 @@ class PreferenceManager: NSObject {
         }
     }
     
-    class var loginMethod: Int! {
+    class var loginMethod: String! {
         get{
-            return UserDefaults.standard.integer(forKey: "loginMethod")
+            return UserDefaults.standard.string(forKey: "loginMethod")
         }
         set{
             UserDefaults.standard.set(newValue, forKey: "loginMethod")
