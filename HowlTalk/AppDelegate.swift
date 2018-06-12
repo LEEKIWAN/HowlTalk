@@ -17,13 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
 
     var window: UIWindow?
     var currentView: String!
-    var databaseRef = Database.database().reference()
+    var databaseRef: DatabaseReference!
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
     
         FirebaseApp.configure()
 
+        self.databaseRef = Database.database().reference()
+        
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
@@ -76,19 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         let authentication = user.authentication
         let credential = GoogleAuthProvider.credential(withIDToken: (authentication?.idToken)!, accessToken: (authentication?.accessToken)!)
         
-        var userUID: String?
-        
-        Auth.auth().signInAndRetrieveData(with: credential) { (result, error) in
-            if let error = error {
-                log.error(error.localizedDescription)
-                return
-            }
-            userUID = result?.user.uid
-            PreferenceManager.userUID = userUID
-        }
-        
-        
-        
+        var userUID: String? = nil
         let thumbSize = CGSize.init(width: 500, height: 500)
         let userID = user!.userID
         let idToken = user!.authentication.idToken
@@ -110,10 +100,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         PreferenceManager.profileImageURL = imageURL?.absoluteString
         PreferenceManager.loginMethod = SocialLoginMethod.Google.rawValue
         
-        self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : user!.userID, "userName" : user!.profile.name, "userEmail" : user!.profile.email, "profileImageURL" : imageURL?.absoluteString])
+        Auth.auth().signInAndRetrieveData(with: credential) { (result, error) in
+            if let error = error {
+                log.error(error.localizedDescription)
+                return
+            }
+            userUID = result?.user.uid
+            PreferenceManager.userUID = userUID
+            self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : userID, "userName" : name, "userEmail" : email, "profileImageURL" : imageURL?.absoluteString])
+            
+            self.moveToName(menuName: .Main)
+        }
         
-        
-        self.moveToName(menuName: .Main)
     }
     
     func requestFacebookUserInfo() {
@@ -128,21 +126,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
                     return
                 }
                 
-                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                
-                var userUID: String?
-                Auth.auth().signInAndRetrieveData(with: credential) { (result, error) in
-                    if let error = error {
-                        log.error(error.localizedDescription)
-                        return
-                    }
-                    userUID = result?.user.uid
-                    PreferenceManager.userUID = result?.user.uid
-                }
-                
-                
                 if let userData = result as? [String:AnyObject] {
                     
+                    var userUID: String?
                     let userID = userData["id"] as? String
                     let picture = userData["picture"] as! NSDictionary
                     let pictureData = picture.object(forKey: "data") as! NSDictionary
@@ -158,13 +144,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
                     
                     print("FaceBook ===> \(userData)")
                     
-                    self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : userID, "userName" : userName, "userEmail" : userEmail, "profileImageURL" : imageURL])
+                    
+                    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+
+                    Auth.auth().signInAndRetrieveData(with: credential) { (result, error) in
+                        if let error = error {
+                            log.error(error.localizedDescription)
+                            
+                            return
+                        }
+                        userUID = result?.user.uid
+                        PreferenceManager.userUID = result?.user.uid
+                        self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : userID, "userName" : userName, "userEmail" : userEmail, "profileImageURL" : imageURL])
+                        
+                        self.moveToName(menuName: .Main)
+                    }
+                    
                 }
             })
             connection.delegate = self
             connection.start()
             
-            self.moveToName(menuName: .Main)
+            
         }
     }
     
@@ -180,7 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
                 PreferenceManager.userEmail = user.user.email
                 PreferenceManager.userPassword = password
                 PreferenceManager.loginMethod = SocialLoginMethod.Direct.rawValue
-                
+               
                 self.moveToName(menuName: .Main)
             }
         }

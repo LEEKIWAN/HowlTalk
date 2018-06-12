@@ -76,8 +76,8 @@ class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVAct
                 self.present(alertController, animated: true, completion: nil)
                 
                 // DB
-                self.databaseRef.child("USER_TB").child((result?.user.uid)!).setValue(["name" : self.nameTextField.text!])
-               
+                self.databaseRef.child("USER_TB").child((result?.user.uid)!).setValue(["userName" : self.nameTextField.text!, "userEmail" : self.emailTextField.text!])
+//               self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : userID, ", "profileImageURL" : imageURL])
             }
             
         }

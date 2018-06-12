@@ -13,6 +13,8 @@
 		8318C9E620C4089800144C4D /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */; };
 		831EC09B20CB6D17007AED10 /* SplashView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 831EC09A20CB6D17007AED10 /* SplashView.storyboard */; };
 		831EC09D20CC0F84007AED10 /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EC09C20CC0F84007AED10 /* PreferenceManager.swift */; };
+		83329B3120CFF68900DF5C2F /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83329B3020CFF68900DF5C2F /* FriendsListViewController.swift */; };
+		83329B3420CFFDF300DF5C2F /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83329B3320CFFDF300DF5C2F /* UserDTO.swift */; };
 		8337ECE420C6C60D00CB2C2E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */; };
 		8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */; };
 		8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */; };
@@ -40,6 +42,8 @@
 		8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		831EC09A20CB6D17007AED10 /* SplashView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashView.storyboard; sourceTree = "<group>"; };
 		831EC09C20CC0F84007AED10 /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
+		83329B3020CFF68900DF5C2F /* FriendsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
+		83329B3320CFFDF300DF5C2F /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		83329B3220CFFDDF00DF5C2F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83329B3320CFFDF300DF5C2F /* UserDTO.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8347056A20C7FE9600C5B44E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +122,7 @@
 		8347056B20C7FE9600C5B44E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				83329B3020CFF68900DF5C2F /* FriendsListViewController.swift */,
 				8347056C20C94F1400C5B44E /* MainViewController.swift */,
 				835952CD20B3B0C400E1ECDA /* LogInViewController.swift */,
 				8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */,
@@ -142,6 +155,7 @@
 			children = (
 				835952CB20B3B0C400E1ECDA /* AppDelegate.swift */,
 				8318C9DE20C3FB3500144C4D /* Common */,
+				83329B3220CFFDDF00DF5C2F /* Model */,
 				8347056A20C7FE9600C5B44E /* View */,
 				8347056B20C7FE9600C5B44E /* Controller */,
 				835952D220B3B0C500E1ECDA /* Assets.xcassets */,
@@ -296,6 +310,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -320,6 +335,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -367,6 +383,7 @@
 			files = (
 				831EC09D20CC0F84007AED10 /* PreferenceManager.swift in Sources */,
 				8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */,
+				83329B3120CFF68900DF5C2F /* FriendsListViewController.swift in Sources */,
 				8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */,
 				833D3B8D20CD36A6006E327B /* PasswordFindViewController.swift in Sources */,
 				833D3B8920CD19A1006E327B /* MenuName.swift in Sources */,
@@ -377,6 +394,7 @@
 				8318C9E220C3FD7D00144C4D /* Logger.swift in Sources */,
 				8337ECE420C6C60D00CB2C2E /* UIColor+Extension.swift in Sources */,
 				83E7D6EC20CC12EF00E5C379 /* SocialLoginMethod.swift in Sources */,
+				83329B3420CFFDF300DF5C2F /* UserDTO.swift in Sources */,
 				8347056D20C94F1400C5B44E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

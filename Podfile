@@ -16,4 +16,6 @@ target 'HowlTalk' do
   pod 'TextFieldEffects'
   pod 'SKSplashView'
   pod 'NVActivityIndicatorView'
+  pod 'Kingfisher', '~> 4.0'
+  
 end
