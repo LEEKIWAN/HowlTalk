@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import Kingfisher
+import NVActivityIndicatorView
 
 class FriendsListTableViewCell: UITableViewCell {
     
@@ -33,7 +34,7 @@ class FriendsListTableViewCell: UITableViewCell {
     
 }
 
-class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NVActivityIndicatorViewable {
 
     
     var userArray: [UserDTO] = []
@@ -47,13 +48,12 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func requestFriendsList() {
+        startAnimating()
+        
         databaseRef.child("USER_TB").observe(.value) { (snapshot) in
             self.userArray.removeAll()
             
             for child in snapshot.children {
-//                let value = snapshot.value as? NSDictionary
-//                let username = value?["username"] as? String ?? ""
-//                let user = User(username: username)
                 
                 let data = child as! DataSnapshot
                 let value = data.value as! NSDictionary
@@ -72,6 +72,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 self.userArray.append(userDTO)
             }
             
+            self.stopAnimating()
             self.tableView.reloadData()
         }
         
@@ -82,6 +83,14 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let chattingViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChattingViewController")
+        self.navigationController?.pushViewController(chattingViewController!, animated: true)
+        
     }
     
     
