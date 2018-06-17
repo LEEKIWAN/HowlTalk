@@ -58,6 +58,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 let data = child as! DataSnapshot
                 let value = data.value as! NSDictionary
                 
+                let userUID = value["userUID"] as? String ?? ""
                 let userID = value["userID"] as? String ?? ""
                 let userEmail = value["userEmail"] as? String ?? ""
                 let userName = value["userName"] as? String ?? ""
@@ -65,6 +66,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 let userDTO = UserDTO()
                 
+                userDTO.userUID = userUID
                 userDTO.userID = userID
                 userDTO.userName = userName
                 userDTO.userEmail = userEmail
@@ -86,10 +88,12 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
         
-        let chattingViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChattingViewController")
-        self.navigationController?.pushViewController(chattingViewController!, animated: true)
+        let chattingViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChattingViewController") as! ChattingViewController
+        
+        chattingViewController.destUID = self.userArray[indexPath.row].userUID
+        
+        self.navigationController?.pushViewController(chattingViewController, animated: true)
         
     }
     

@@ -88,13 +88,38 @@
         <!--Chatting View Controller-->
         <scene sceneID="jHe-SZ-Lbe">
             <objects>
-                <viewController storyboardIdentifier="ChattingViewController" id="xDs-L8-VSL" customClass="ChattingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChattingViewController" id="xDs-L8-VSL" customClass="ChattingViewController" customModule="HowlTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J5g-TP-oHv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMc-SD-pva">
+                                <rect key="frame" x="345" y="637" width="30" height="30"/>
+                                <state key="normal" title="전송"/>
+                                <connections>
+                                    <action selector="onSendTouched:" destination="xDs-L8-VSL" eventType="touchUpInside" id="bcf-ze-fyU"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fsL-GM-KK3">
+                                <rect key="frame" x="0.0" y="637" width="345" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NMc-SD-pva" firstAttribute="leading" secondItem="fsL-GM-KK3" secondAttribute="trailing" id="0Xj-Gg-Y4q"/>
+                            <constraint firstItem="fsL-GM-KK3" firstAttribute="leading" secondItem="k9p-wT-Ii8" secondAttribute="leading" id="5sf-pn-cZQ"/>
+                            <constraint firstItem="fsL-GM-KK3" firstAttribute="bottom" secondItem="k9p-wT-Ii8" secondAttribute="bottom" id="Pa4-RZ-4c1"/>
+                            <constraint firstItem="k9p-wT-Ii8" firstAttribute="trailing" secondItem="NMc-SD-pva" secondAttribute="trailing" id="Qte-wg-OFm"/>
+                            <constraint firstItem="k9p-wT-Ii8" firstAttribute="bottom" secondItem="NMc-SD-pva" secondAttribute="bottom" id="ucc-HI-xzY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="k9p-wT-Ii8"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="fsL-GM-KK3" id="DId-xy-mJt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjo-7j-uPo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

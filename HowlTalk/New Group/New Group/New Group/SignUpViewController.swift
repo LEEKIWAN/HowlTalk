@@ -67,7 +67,8 @@ class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVAct
                 return
             }
             if result != nil {
-                let alertController = UIAlertController(title: "회원가입", message: "회원가입이 완료되었습니다.", preferredStyle: .alert)
+                
+                let alertController = UIAlertController(title: "회원가입", message: result?.description, preferredStyle: .alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: { (alertAction) in
                     self.dismiss(animated: true, completion: nil)
                 })
@@ -75,8 +76,11 @@ class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVAct
                 alertController.addAction(defaultAction)
                 self.present(alertController, animated: true, completion: nil)
                 
+//                let userUID = result?.user.uid
+                
+                
                 // DB
-                self.databaseRef.child("USER_TB").child((result?.user.uid)!).setValue(["userName" : self.nameTextField.text!, "userEmail" : self.emailTextField.text!])
+                self.databaseRef.child("USER_TB").child((result?.user.uid)!).setValue(["userUID" : result?.user.uid, "userID" : result?.user.providerID, "userName" : self.nameTextField.text!, "userEmail" : self.emailTextField.text!])
 //               self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : userID, ", "profileImageURL" : imageURL])
             }
             

@@ -9,6 +9,7 @@
 import UIKit
 
 class UserDTO: NSObject {
+    var userUID: String?
     var userID: String?
     var userName: String?
     var userEmail: String?

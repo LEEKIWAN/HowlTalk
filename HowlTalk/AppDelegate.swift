@@ -94,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         
         print("AppDelegate ===> [1] ID : \(String(describing: userID)) | [2] idToken : \(String(describing: idToken)) | [3] accessToken : \(String(describing: accessToken)) | [4] name : \(String(describing: name)) | [5] email : \(String(describing: email)) [6] imageURL : \(String(describing: imageURL))")
         
+        
         PreferenceManager.userID = user!.userID
         PreferenceManager.userName = user!.profile.name
         PreferenceManager.userEmail = user!.profile.email
@@ -107,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
             }
             userUID = result?.user.uid
             PreferenceManager.userUID = userUID
-            self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : userID, "userName" : name, "userEmail" : email, "profileImageURL" : imageURL?.absoluteString])
+            self.databaseRef.child("USER_TB").child(userUID!).setValue(["userUID" : userUID, "userID" : userID, "userName" : name, "userEmail" : email, "profileImageURL" : imageURL?.absoluteString])
             
             self.moveToName(menuName: .Main)
         }
@@ -155,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
                         }
                         userUID = result?.user.uid
                         PreferenceManager.userUID = result?.user.uid
-                        self.databaseRef.child("USER_TB").child(userUID!).setValue(["userID" : userID, "userName" : userName, "userEmail" : userEmail, "profileImageURL" : imageURL])
+                        self.databaseRef.child("USER_TB").child(userUID!).setValue(["userUID" : userUID, "userID" : userID, "userName" : userName, "userEmail" : userEmail, "profileImageURL" : imageURL])
                         
                         self.moveToName(menuName: .Main)
                     }
@@ -177,12 +178,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
                 return
             }
             if let user = user {
-                PreferenceManager.userUID = user.user.uid
-                PreferenceManager.userEmail = user.user.email
+                
+                let userUID = user.user.uid
+//                let userID = userData["id"] as? String
+//                let picture = userData["picture"] as! NSDictionary
+//                let pictureData = picture.object(forKey: "data") as! NSDictionary
+//                let imageURL = pictureData.object(forKey: "url") as! String
+                let userEmail  = user.user.email
+                let userName = user.user.displayName
+                
+                PreferenceManager.userUID = userUID
+                PreferenceManager.userName = userName
+                PreferenceManager.userEmail = userEmail
                 PreferenceManager.userPassword = password
                 PreferenceManager.loginMethod = SocialLoginMethod.Direct.rawValue
                
+                self.databaseRef.child("USER_TB").child(userUID).setValue(["userUID" : userUID, "userName" : userName, "userEmail" : userEmail])
+                //
+                
                 self.moveToName(menuName: .Main)
+                
+                
             }
         }
     }
