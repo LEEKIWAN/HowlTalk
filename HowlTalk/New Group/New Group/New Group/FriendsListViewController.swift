@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import Firebase
 import Kingfisher
 import NVActivityIndicatorView
 
@@ -28,8 +28,11 @@ class FriendsListTableViewCell: UITableViewCell {
     func setData(cellData: UserDTO) {
         nameLabel.text = cellData.userName
         
-        let url = URL(string: cellData.profileImageURL!)
-        profileImageView.kf.setImage(with: url, placeholder:  #imageLiteral(resourceName: "iconmonstr-user-19-240"))
+        if let profileImageURL = cellData.profileImageURL {
+            let url = URL(string: profileImageURL)
+            profileImageView.kf.setImage(with: url, placeholder:  #imageLiteral(resourceName: "iconmonstr-user-19-240"))
+        }
+        
     }
     
 }
@@ -54,24 +57,19 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
             self.userArray.removeAll()
             
             for child in snapshot.children {
-                
                 let data = child as! DataSnapshot
-                let value = data.value as! NSDictionary
+                let value = data.value as! [String : AnyObject]
                 
-                let userUID = value["userUID"] as? String ?? ""
-                let userID = value["userID"] as? String ?? ""
-                let userEmail = value["userEmail"] as? String ?? ""
-                let userName = value["userName"] as? String ?? ""
-                let profileImageURL = value["profileImageURL"] as? String ?? ""
+                let userDTO = UserDTO(JSON: value)
                 
-                let userDTO = UserDTO()
+                let myUID = Auth.auth().currentUser?.uid
                 
-                userDTO.userUID = userUID
-                userDTO.userID = userID
-                userDTO.userName = userName
-                userDTO.userEmail = userEmail
-                userDTO.profileImageURL = profileImageURL
-                self.userArray.append(userDTO)
+                if userDTO?.userUID == myUID {
+                    continue
+                }
+                
+                self.userArray.append(userDTO!) 
+                
             }
             
             self.stopAnimating()

@@ -17,5 +17,6 @@ target 'HowlTalk' do
   pod 'SKSplashView'
   pod 'NVActivityIndicatorView'
   pod 'Kingfisher', '~> 4.0'
+  pod 'ObjectMapper', '~> 3.2'
   
 end

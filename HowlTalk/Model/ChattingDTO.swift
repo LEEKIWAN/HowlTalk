@@ -7,18 +7,24 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class ChattingDTO: NSObject {
-
+class ChattingDTO: Mappable {
+    
     var UID: String?
     var destUID: String?
     
     var users: Dictionary<String, Bool> = [ : ]             // 채팅방의 사람들
-    var comments: Dictionary<String, Comment> = [ : ]       // 채팅방의 대화내역
-}
-
-class Comment {
-    public var uid: String?
-    public var message: String?
+    var comments: Dictionary<String, CommentDTO> = [ : ]       // 채팅방의 대화내역
     
+    required init?(map: Map) {
+    }
+    
+    
+    func mapping(map: Map) {
+        users <- map["users"]
+        comments <- map["comments"]
+    }
+    
+
 }

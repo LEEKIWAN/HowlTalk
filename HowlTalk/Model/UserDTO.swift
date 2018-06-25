@@ -7,12 +7,28 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class UserDTO: NSObject {
+
+class UserDTO: Mappable {
+    
     var userUID: String?
     var userID: String?
     var userName: String?
     var userEmail: String?
     var profileImageURL: String?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        userUID <- map["userUID"]
+        userID <- map["userID"]
+        userName <- map["userName"]
+        userEmail <- map["userEmail"]
+        profileImageURL <- map["profileImageURL"]
+    }
 
+    
 }
