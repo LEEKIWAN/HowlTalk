@@ -30,8 +30,6 @@ class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVAct
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setEvent()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,11 +42,6 @@ class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVAct
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-  
-    
-    
-    func setEvent() {
-    }
     
     //MARK: - event
     

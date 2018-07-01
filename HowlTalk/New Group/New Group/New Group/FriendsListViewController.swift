@@ -50,6 +50,8 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         self.requestFriendsList()
     }
     
+    
+    //MARK: - request
     func requestFriendsList() {
         startAnimating()
         
@@ -64,7 +66,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 let myUID = Auth.auth().currentUser?.uid
                 
-                if userDTO?.userUID == myUID {
+                if userDTO?.userUID == myUID {              // 내 유저 아이디
                     continue
                 }
                 

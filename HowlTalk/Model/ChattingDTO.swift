@@ -11,9 +11,6 @@ import ObjectMapper
 
 class ChattingDTO: Mappable {
     
-    var UID: String?
-    var destUID: String?
-    
     var users: Dictionary<String, Bool> = [ : ]             // 채팅방의 사람들
     var comments: Dictionary<String, CommentDTO> = [ : ]       // 채팅방의 대화내역
     

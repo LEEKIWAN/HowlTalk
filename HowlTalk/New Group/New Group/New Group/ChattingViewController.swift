@@ -9,16 +9,27 @@
 import UIKit
 import Firebase
 
+
+class MyMessageCell: UITableViewCell {
+    
+    @IBOutlet weak var messageLabel: UILabel!
+}
+
+class DestinationCell: UITableViewCell {
+    
+    @IBOutlet weak var profileLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var messageLabel: UILabel!
+}
+
+
 class ChattingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var chattingRoomID: String?
     
     var uid: String? = Auth.auth().currentUser?.uid
-    
     var destUID: String?
-    
     var commentsArray: [CommentDTO] = []
-    
     var userModel: UserDTO?
     
     @IBOutlet weak var tableView: UITableView!
@@ -27,7 +38,6 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.isCreatedRoom()
     }
 
@@ -35,6 +45,9 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         self.createRoom()
     }
 
+    
+    
+    //MARK: - Request
 
     func createRoom() {
         let userInfo :Dictionary<String, Any> = ["users" : [uid! : true, destUID! : true ] ]
@@ -49,8 +62,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         else {
             let value :Dictionary<String, Any> = [ "uid" : uid!, "message" : textField.text! ]
-            
-            Database.database().reference().child("ChattingRoom_TB").child(chattingRoomID!).child("comments").childByAutoId().setValue(value) { (error, reference) in
+        Database.database().reference().child("ChattingRoom_TB").child(chattingRoomID!).child("comments").childByAutoId().setValue(value) { (error, reference) in
             }
         }
     }
@@ -63,10 +75,10 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
             
             for snapshot in snapshots {
                 
-                if let chattingRoomDic = snapshot.value as? [String : AnyObject] {
-                    let chattingModel = ChattingDTO(JSON: chattingRoomDic)
+                if let chattingRoom = snapshot.value as? [String : AnyObject] {
+                    let chattingDTO = ChattingDTO(JSON: chattingRoom)
                     
-                    if chattingModel?.users[self.destUID!] == true {
+                    if chattingDTO?.users[self.destUID!] == true {
                         self.chattingRoomID = snapshot.key
                         self.sendButton.isEnabled = true
                         
@@ -79,15 +91,9 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    //MARK: - event
-    @IBAction func onBackgroundTouched(_ sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
-    
     func getMessageList() {
         self.commentsArray.removeAll()
-        
-        Database.database().reference().child("ChattingRoom_TB").child(self.chattingRoomID!).child("comments").observe(.value) { (snapshot) in
+         Database.database().reference().child("ChattingRoom_TB").child(self.chattingRoomID!).child("comments").observe(.value) { (snapshot) in
             let snapshots = snapshot.children.allObjects as! [DataSnapshot]
             for data in snapshots {
                 let dataDict = data.value as! [String : AnyObject]
@@ -99,6 +105,9 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+
+
+    
     func getDestinationUserInfo() {
         Database.database().reference().child("users").child(self.destUID!).observeSingleEvent(of: .value) { (snapshot) in
             let snapshots = snapshot.children.allObjects as! [DataSnapshot]
@@ -108,6 +117,12 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    //MARK: - event
+    @IBAction func onBackgroundTouched(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    
     //MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,22 +130,10 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let view = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
+        let view = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath)
         
         view.textLabel?.text = self.commentsArray[indexPath.row].message
         
         return view
     }
-}
-
-class MyMessageCell: UITableViewCell {
-    
-    @IBOutlet weak var messageLabel: UILabel!
-}
-
-class DestinationCell: UITableViewCell {
-    
-    @IBOutlet weak var profileLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var messageLabel: UILabel!
 }
