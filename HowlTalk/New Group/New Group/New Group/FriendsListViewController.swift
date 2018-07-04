@@ -19,7 +19,6 @@ class FriendsListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
-        
         profileImageView.layer.borderWidth = 1
         profileImageView.layer.borderColor = UIColor.lightGray.cgColor
     }
@@ -32,7 +31,6 @@ class FriendsListTableViewCell: UITableViewCell {
             let url = URL(string: profileImageURL)
             profileImageView.kf.setImage(with: url, placeholder:  #imageLiteral(resourceName: "iconmonstr-user-19-240"))
         }
-        
     }
     
 }
@@ -64,11 +62,10 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 let userDTO = UserDTO(JSON: value)
                 
-                let myUID = Auth.auth().currentUser?.uid
-                
-                if userDTO?.userUID == myUID {              // 내 유저 아이디
-                    continue
-                }
+//                let myUID = Auth.auth().currentUser?.uid
+//                if userDTO?.userUID == myUID {              // 내 유저 아이디
+//                    continue
+//                }
                 
                 self.userArray.append(userDTO!) 
                 
