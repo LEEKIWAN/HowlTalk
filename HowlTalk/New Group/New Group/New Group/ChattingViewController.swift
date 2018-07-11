@@ -13,6 +13,7 @@ import Firebase
 class MyMessageCell: UITableViewCell {
     
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
 }
 
 class OtherMessageCell: UITableViewCell {
@@ -20,6 +21,7 @@ class OtherMessageCell: UITableViewCell {
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
 }
 
 
@@ -41,7 +43,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
-        self.requestChattingRoom()
+        self.requestChattingRoomInformation()
     }
     
     
@@ -58,43 +60,59 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     @IBAction func onSendTouched(_ sender: UIButton) {
-        self.requestCreateChattingRoom()
+        self.requestSendMessage()
     }
+    
     
     //MARK: - Request
 
-    func requestCreateChattingRoom() {
-        let userInfo: Dictionary<String, Any> = ["users" : [uid! : true, destUID! : true ] ]
-        
+    func requestSendMessage() {
         if chattingRoomID == nil {
-            Database.database().reference().child("ChattingRoom_TB").childByAutoId().setValue(userInfo) { (error, reference) in
-                if error != nil {
-                    self.requestChattingRoom()
-                }
-            }
+            self.requestCreateChattingRoom()
         }
         else {
-            let value :Dictionary<String, Any> = [ "uid" : uid!, "message" : textField.text!]
+            let value :Dictionary<String, Any> = [
+                "uid" : uid!,
+                "message" : textField.text!,
+                "timeStamp" : ServerValue.timestamp()
+                
+            ]
+            
             Database.database().reference().child("ChattingRoom_TB").child(chattingRoomID!).child("comments").childByAutoId().setValue(value) { (error, reference) in
+                self.textField.text = ""
+                
+                self.requestMessageList()
             }
         }
     }
     
     
-    // 상대방 나인지 구분은 안되어ㅣㅇㅆ따.
-    func requestChattingRoom() {
+    func requestCreateChattingRoom() {
+        let userInfo: Dictionary<String, Any> = ["users" : [uid! : true, destUID! : true ]]
+        
+        Database.database().reference().child("ChattingRoom_TB").childByAutoId().setValue(userInfo) { (error, reference) in
+               self.chattingRoomID = reference.key
+            print(self.chattingRoomID)
+            
+            self.requestSendMessage()
+            
+        }
+    }
+        
+    
+    func requestChattingRoomInformation() {
         Database.database().reference().child("ChattingRoom_TB").queryOrdered(byChild: "users/" + uid!).queryEqual(toValue: true).observeSingleEvent(of: .value) { (snapshot) in
             
             let snapshots = snapshot.children.allObjects as! [DataSnapshot]
-
-            for snapshot in snapshots {
-                if let chattingRoom = snapshot.value as? [String : AnyObject] {
+            
+            print("requestChattingRoomInformation : \(snapshots)")
+            
+            for item in snapshots {
+                if let chattingRoom = item.value as? [String : AnyObject] {
                     let chattingDTO = ChattingDTO(JSON: chattingRoom)
 
                     if chattingDTO?.users[self.destUID!] == true {
-                        self.chattingRoomID = snapshot.key
-                        self.sendButton.isEnabled = true
-
+                        self.chattingRoomID = item.key
                         self.requestMessageList()
                     }
                 }
@@ -107,8 +125,15 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func requestMessageList() {
         self.commentsArray.removeAll()
-         Database.database().reference().child("ChattingRoom_TB").child(self.chattingRoomID!).child("comments").observe(.value) { (snapshot) in
+        self.tableView.reloadData()
+        print("requestMessageList Called")
+        
+        
+    Database.database().reference().child("ChattingRoom_TB").child(self.chattingRoomID!).child("comments").observe(.value) { (snapshot) in
             let snapshots = snapshot.children.allObjects as! [DataSnapshot]
+        
+        
+        
             for data in snapshots {
                 let dataDict = data.value as! [String : AnyObject]
                 let comment = CommentDTO(JSON: dataDict)
@@ -147,17 +172,27 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let commnet = commentsArray[indexPath.row];
+        let comment = commentsArray[indexPath.row];
         
-        if(commnet.uid == uid) {
+        if(comment.uid == uid) {
             let view = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MyMessageCell
-            view.messageLabel.text = commnet.message;
+            view.messageLabel.text = comment.message;
+            
+            if let time = comment.timeStamp {
+                view.timeLabel.text = time.toDateString
+            }
+            
             return view
         }
         else {
             let view = tableView.dequeueReusableCell(withIdentifier: "OtherMessageCell", for: indexPath) as! OtherMessageCell
 //            view.profileLabel.text = userModel
-            view.messageLabel.text = commnet.message;
+            view.messageLabel.text = comment.message;
+            
+            if let time = comment.timeStamp {
+                view.timeLabel.text = time.toDateString
+            }
+            
             return view
         }
     }

@@ -33,7 +33,9 @@
 		835952D320B3B0C500E1ECDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835952D220B3B0C500E1ECDA /* Assets.xcassets */; };
 		835952D620B3B0C500E1ECDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835952D420B3B0C500E1ECDA /* LaunchScreen.storyboard */; };
 		835A179B20D93B9A00518FB0 /* CommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835A179A20D93B9A00518FB0 /* CommentDTO.swift */; };
+		837300F420F3861A0050B191 /* ChattingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837300F320F3861A0050B191 /* ChattingListViewController.swift */; };
 		83B9CB2220CAD9A600E73F79 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9CB2120CAD9A600E73F79 /* SplashView.swift */; };
+		83E4F83120F62C1C0066643A /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E4F83020F62C1C0066643A /* Int+Extension.swift */; };
 		83E7D6EC20CC12EF00E5C379 /* SocialLoginMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +69,9 @@
 		835952D520B3B0C500E1ECDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835952D720B3B0C500E1ECDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		835A179A20D93B9A00518FB0 /* CommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDTO.swift; sourceTree = "<group>"; };
+		837300F320F3861A0050B191 /* ChattingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewController.swift; sourceTree = "<group>"; };
 		83B9CB2120CAD9A600E73F79 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		83E4F83020F62C1C0066643A /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLoginMethod.swift; sourceTree = "<group>"; };
 		970F5A9EFFE4AFAD66242517 /* Pods-HowlTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,9 +99,8 @@
 		8318C9DE20C3FB3500144C4D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				83E4F83220F62EAB0066643A /* Extension */,
 				83E7D6EA20CC12D900E5C379 /* Enum */,
-				8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */,
-				8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */,
 				8318C9E120C3FD7D00144C4D /* Logger.swift */,
 				8350372420C94BB200CCE958 /* UIAlertController.swift */,
 				831EC09C20CC0F84007AED10 /* PreferenceManager.swift */,
@@ -132,6 +135,7 @@
 			children = (
 				83329B3020CFF68900DF5C2F /* FriendsListViewController.swift */,
 				833F538C20D290E70085D289 /* ChattingViewController.swift */,
+				837300F320F3861A0050B191 /* ChattingListViewController.swift */,
 				8347056C20C94F1400C5B44E /* MainViewController.swift */,
 				835952CD20B3B0C400E1ECDA /* LogInViewController.swift */,
 				8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */,
@@ -176,6 +180,16 @@
 				8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */,
 			);
 			path = HowlTalk;
+			sourceTree = "<group>";
+		};
+		83E4F83220F62EAB0066643A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */,
+				8337ECE320C6C60D00CB2C2E /* Date+Extension.swift */,
+				83E4F83020F62C1C0066643A /* Int+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		83E7D6EA20CC12D900E5C379 /* Enum */ = {
@@ -393,9 +407,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				831EC09D20CC0F84007AED10 /* PreferenceManager.swift in Sources */,
+				837300F420F3861A0050B191 /* ChattingListViewController.swift in Sources */,
 				8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */,
 				83329B3120CFF68900DF5C2F /* FriendsListViewController.swift in Sources */,
 				8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */,
+				83E4F83120F62C1C0066643A /* Int+Extension.swift in Sources */,
 				833D3B8D20CD36A6006E327B /* PasswordFindViewController.swift in Sources */,
 				833D3B8920CD19A1006E327B /* MenuName.swift in Sources */,
 				83B9CB2220CAD9A600E73F79 /* SplashView.swift in Sources */,

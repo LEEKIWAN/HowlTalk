@@ -12,7 +12,11 @@ import ObjectMapper
 class CommentDTO: Mappable {
     public var uid: String?
     public var message: String?
+    public var timeStamp: Int?
     
+    init () {
+        
+    }
     
     required init?(map: Map) {
     }
@@ -21,6 +25,7 @@ class CommentDTO: Mappable {
     func mapping(map: Map) {
         uid <- map["uid"]
         message <- map["message"]
+        timeStamp <- map["timeStamp"]
     }
     
 }
