@@ -25,7 +25,7 @@ class OtherMessageCell: UITableViewCell {
 }
 
 
-class ChattingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ChattingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     var chattingRoomID: String?
     
@@ -44,6 +44,9 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
         self.requestChattingRoomInformation()
+        
+        self.textField.layer.cornerRadius = self.textField.frame.size.height / 2
+        self.sendButton.layer.cornerRadius = self.sendButton.frame.size.height / 2
     }
     
     
@@ -80,22 +83,22 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
             
             Database.database().reference().child("ChattingRoom_TB").child(chattingRoomID!).child("comments").childByAutoId().setValue(value) { (error, reference) in
                 self.textField.text = ""
-                
-                self.requestMessageList()
             }
         }
     }
     
     
     func requestCreateChattingRoom() {
-        let userInfo: Dictionary<String, Any> = ["users" : [uid! : true, destUID! : true ]]
+        let userInfo: Dictionary<String, Any> = [
+            "users" : [uid! : true, destUID! : true ]
+        ]
         
         Database.database().reference().child("ChattingRoom_TB").childByAutoId().setValue(userInfo) { (error, reference) in
-               self.chattingRoomID = reference.key
-            print(self.chattingRoomID)
+            self.chattingRoomID = reference.key
+            print(self.chattingRoomID!)
             
             self.requestSendMessage()
-            
+            self.requestMessageList()
         }
     }
         
@@ -116,23 +119,16 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
                         self.requestMessageList()
                     }
                 }
-
             }
-
         }
     }
     
     
     func requestMessageList() {
-        self.commentsArray.removeAll()
-        self.tableView.reloadData()
-        print("requestMessageList Called")
+        Database.database().reference().child("ChattingRoom_TB").child(self.chattingRoomID!).child("comments").observe(.value) { (snapshot) in
+            self.commentsArray.removeAll()
         
-        
-    Database.database().reference().child("ChattingRoom_TB").child(self.chattingRoomID!).child("comments").observe(.value) { (snapshot) in
             let snapshots = snapshot.children.allObjects as! [DataSnapshot]
-        
-        
         
             for data in snapshots {
                 let dataDict = data.value as! [String : AnyObject]
@@ -141,18 +137,40 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.commentsArray.append(comment!)
                 self.tableView.reloadData()
             }
-        }
-    }
-    
-
-
-    
-    func getDestinationUserInfo() {
-        Database.database().reference().child("users").child(self.destUID!).observeSingleEvent(of: .value) { (snapshot) in
-            let snapshots = snapshot.children.allObjects as! [DataSnapshot]
             
+            self.tableView.scrollToRow(at: IndexPath(row: self.commentsArray.count - 1 , section: 0), at: .bottom, animated: false)
         }
     }
+    
+    
+//    func getDestinationUserInfo() {
+//        Database.database().reference().child("users").child(self.destUID!).observeSingleEvent(of: .value) { (snapshot) in
+//            let snapshots = snapshot.children.allObjects as! [DataSnapshot]
+//
+//        }
+//    }
+    
+    //MARK: - TextFieldDelegate
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        <#code#>
+//    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        NSString *text = textField.text;
+//        NSString *prospectiveText = [text stringByReplacingCharactersInRange:range withString:string];
+//
+//        if (prospectiveText.length > 8) {
+//            return NO;
+//        }
+//        return YES;
+        
+        let text = textField.text!
+        let prospectiveText = text.replacingCharacters(in: <#T##RangeExpression#>, with: <#T##StringProtocol#>)
+
+        return true
+    }
+    
+    
     
     //MARK: - event
     @IBAction func onBackgroundTouched(_ sender: UITapGestureRecognizer) {
@@ -208,14 +226,17 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
             keyboardHeight -= bottomInset
         }
         
-        self.consSendButtonBMargin.constant = keyboardHeight + 2
+        self.consSendButtonBMargin.constant = keyboardHeight
         
         self.view.layoutIfNeeded()
         
+        self.tableView.scrollToRow(at: IndexPath(row: self.commentsArray.count - 1 , section: 0), at: .bottom, animated: false)
     }
     
     @objc func keyboardWillBeHidden(notification: NSNotification){
         self.consSendButtonBMargin.constant = 5
         self.view.layoutIfNeeded()
     }
+    
+    
 }
