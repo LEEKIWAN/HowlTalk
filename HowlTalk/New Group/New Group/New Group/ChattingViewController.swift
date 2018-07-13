@@ -17,22 +17,42 @@ class MyMessageCell: UITableViewCell {
 }
 
 class OtherMessageCell: UITableViewCell {
+
+    var UID: String?
     
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
+        profileImageView.layer.borderWidth = 1
+        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    
+    func setData(cellData: UserDTO) {
+        profileLabel.text = cellData.userName
+        UID = cellData.userUID
+        
+        if let profileImageURL = cellData.profileImageURL {
+            let url = URL(string: profileImageURL)
+            profileImageView.kf.setImage(with: url, placeholder:  #imageLiteral(resourceName: "iconmonstr-user-19-240"))
+        }
+    }
+    
+    func willHideProfileImage(_ willHide: Bool) {
+        profileLabel.isHidden = willHide
+        profileImageView.isHidden = willHide
+    }
+    
 }
 
 
 class ChattingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
-    var chattingRoomID: String?
-    
-    var uid: String? = Auth.auth().currentUser?.uid
-    var destUID: String?
-    var commentsArray: [CommentDTO] = []
-    var userModel: UserDTO?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
@@ -40,13 +60,25 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var consSendButtonBMargin: NSLayoutConstraint!
     
+    var chattingRoomID: String?
+    
+    var uid: String? = Auth.auth().currentUser?.uid
+    var destUID: String?
+    var commentsArray: [CommentDTO] = []
+    var destUserModel: UserDTO?
+    
+    var chattingDTO: ChattingDTO?
+    
+    //MARK: - Life
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
         self.requestChattingRoomInformation()
-        
+        self.requestDestinationUserInfo()
         self.textField.layer.cornerRadius = self.textField.frame.size.height / 2
         self.sendButton.layer.cornerRadius = self.sendButton.frame.size.height / 2
+        
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     
@@ -62,14 +94,10 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tabBarController?.tabBar.isHidden = false
     }
 
-    @IBAction func onSendTouched(_ sender: UIButton) {
-        self.requestSendMessage()
-    }
-    
-    
     //MARK: - Request
 
     func requestSendMessage() {
+        
         if chattingRoomID == nil {
             self.requestCreateChattingRoom()
         }
@@ -81,8 +109,10 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
                 
             ]
             
+            self.textField.text = ""
+            self.sendButton.isHidden = true
+            
             Database.database().reference().child("ChattingRoom_TB").child(chattingRoomID!).child("comments").childByAutoId().setValue(value) { (error, reference) in
-                self.textField.text = ""
             }
         }
     }
@@ -112,9 +142,9 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
             
             for item in snapshots {
                 if let chattingRoom = item.value as? [String : AnyObject] {
-                    let chattingDTO = ChattingDTO(JSON: chattingRoom)
-
-                    if chattingDTO?.users[self.destUID!] == true {
+                    self.chattingDTO = ChattingDTO(JSON: chattingRoom)
+                    
+                    if self.chattingDTO?.users[self.destUID!] == true {
                         self.chattingRoomID = item.key
                         self.requestMessageList()
                     }
@@ -143,43 +173,36 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-//    func getDestinationUserInfo() {
-//        Database.database().reference().child("users").child(self.destUID!).observeSingleEvent(of: .value) { (snapshot) in
+    func requestDestinationUserInfo() {
+        Database.database().reference().child("USER_TB").child(self.destUID!).observeSingleEvent(of: .value) { (snapshot) in
 //            let snapshots = snapshot.children.allObjects as! [DataSnapshot]
-//
-//        }
-//    }
+            
+            let dataDict = snapshot.value as! [String : AnyObject]
+            self.destUserModel = UserDTO(JSON: dataDict)
+        }
+    }
     
     //MARK: - TextFieldDelegate
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        <#code#>
-//    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        NSString *text = textField.text;
-//        NSString *prospectiveText = [text stringByReplacingCharactersInRange:range withString:string];
-//
-//        if (prospectiveText.length > 8) {
-//            return NO;
-//        }
-//        return YES;
-        
-        let text = textField.text!
-        let prospectiveText = text.replacingCharacters(in: <#T##RangeExpression#>, with: <#T##StringProtocol#>)
-
-        return true
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if (textField.text?.count)! > 0 {
+            sendButton.isHidden = false
+        }
+        else {
+            sendButton.isHidden = true
+        }
     }
     
     
-    
     //MARK: - event
+    @IBAction func onSendTouched(_ sender: UIButton) {
+        self.requestSendMessage()
+    }
+    
     @IBAction func onBackgroundTouched(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
-    
     //MARK: - UITableViewDataSource
-   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -204,7 +227,20 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         else {
             let view = tableView.dequeueReusableCell(withIdentifier: "OtherMessageCell", for: indexPath) as! OtherMessageCell
-//            view.profileLabel.text = userModel
+            let prevView = tableView.cellForRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section)) as? OtherMessageCell
+            
+            view.setData(cellData: self.destUserModel!)
+            
+            if let prevView = prevView {
+                if(view.UID == prevView.UID) {
+                    view.willHideProfileImage(true)
+                }
+            }
+            else {
+                view.willHideProfileImage(false)
+            }
+
+            
             view.messageLabel.text = comment.message;
             
             if let time = comment.timeStamp {
