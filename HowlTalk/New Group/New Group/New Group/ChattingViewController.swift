@@ -51,14 +51,17 @@ class OtherMessageCell: UITableViewCell {
 }
 
 
-class ChattingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class ChattingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
 
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var consSendButtonBMargin: NSLayoutConstraint!
+    
+    @IBOutlet weak var consTextViewheight: NSLayoutConstraint!
+    
     
     var chattingRoomID: String?
     
@@ -75,10 +78,11 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tabBarController?.tabBar.isHidden = true
         self.requestChattingRoomInformation()
         self.requestDestinationUserInfo()
-        self.textField.layer.cornerRadius = self.textField.frame.size.height / 2
+        self.textView.layer.cornerRadius = self.textView.frame.size.height / 2
         self.sendButton.layer.cornerRadius = self.sendButton.frame.size.height / 2
-        
-        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.textView.textContainerInset = UIEdgeInsets(top: textView.textContainerInset.top, left: 10, bottom: textView.textContainerInset.bottom, right: 60)
+
+
     }
     
     
@@ -104,14 +108,14 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         else {
             let value :Dictionary<String, Any> = [
                 "uid" : uid!,
-                "message" : textField.text!,
+                "message" : textView.text!,
                 "timeStamp" : ServerValue.timestamp()
                 
             ]
             
-            self.textField.text = ""
+            self.textView.text = ""
             self.sendButton.isHidden = true
-            
+            self.textViewDidChange(self.textView)
             Database.database().reference().child("ChattingRoom_TB").child(chattingRoomID!).child("comments").childByAutoId().setValue(value) { (error, reference) in
             }
         }
@@ -182,9 +186,16 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    //MARK: - TextFieldDelegate
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        if (textField.text?.count)! > 0 {
+    //MARK: - UITextViewDelegate
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.contentSize.height < 84  {
+            self.consTextViewheight.constant = textView.contentSize.height
+            self.textView.setContentOffset(CGPoint.zero, animated: true)
+            self.view.layoutIfNeeded()
+        }
+        
+        
+        if (textView.text?.count)! > 0 {
             sendButton.isHidden = false
         }
         else {
@@ -270,7 +281,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @objc func keyboardWillBeHidden(notification: NSNotification){
-        self.consSendButtonBMargin.constant = 5
+        self.consSendButtonBMargin.constant = 0
         self.view.layoutIfNeeded()
     }
     
