@@ -92,7 +92,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         
         Database.database().reference().child("ChattingRoom_TB").childByAutoId().setValue(userInfo) { (error, reference) in
                self.chattingRoomID = reference.key
-            print(self.chattingRoomID)
+            print(self.chattingRoomID!)
             
             self.requestSendMessage()
             
