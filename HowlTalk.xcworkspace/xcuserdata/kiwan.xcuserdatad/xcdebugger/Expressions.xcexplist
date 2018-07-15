@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in ChattingViewController.requestMessageList():ChattingViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.commentsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SplashView.splashViewDidEndAnimating(_:):SplashView.swift">
          <PersistentStrings>
             <PersistentString
