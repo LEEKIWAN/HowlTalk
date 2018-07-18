@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5A638055170E6E36C336B526 /* Pods_HowlTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BF4F89DF59EC5E7EF3B9426 /* Pods_HowlTalk.framework */; };
+		831672E920FF6E3100981666 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 831672E820FF6E3100981666 /* GoogleService-Info.plist */; };
 		8318C9E220C3FD7D00144C4D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8318C9E120C3FD7D00144C4D /* Logger.swift */; };
-		8318C9E420C4037300144C4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8318C9E320C4037300144C4D /* GoogleService-Info.plist */; };
 		8318C9E620C4089800144C4D /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */; };
 		831EC09B20CB6D17007AED10 /* SplashView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 831EC09A20CB6D17007AED10 /* SplashView.storyboard */; };
 		831EC09D20CC0F84007AED10 /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EC09C20CC0F84007AED10 /* PreferenceManager.swift */; };
@@ -42,8 +42,9 @@
 /* Begin PBXFileReference section */
 		0BF4F89DF59EC5E7EF3B9426 /* Pods_HowlTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowlTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC364FB256C014B919F642F /* Pods-HowlTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.debug.xcconfig"; sourceTree = "<group>"; };
+		831672E720FF64BB00981666 /* HowlTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HowlTalk.entitlements; sourceTree = "<group>"; };
+		831672E820FF6E3100981666 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8318C9E120C3FD7D00144C4D /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		8318C9E320C4037300144C4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		831EC09A20CB6D17007AED10 /* SplashView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashView.storyboard; sourceTree = "<group>"; };
 		831EC09C20CC0F84007AED10 /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
@@ -166,6 +167,7 @@
 		835952CA20B3B0C400E1ECDA /* HowlTalk */ = {
 			isa = PBXGroup;
 			children = (
+				831672E720FF64BB00981666 /* HowlTalk.entitlements */,
 				835952CB20B3B0C400E1ECDA /* AppDelegate.swift */,
 				8318C9DE20C3FB3500144C4D /* Common */,
 				83329B3220CFFDDF00DF5C2F /* Model */,
@@ -176,7 +178,7 @@
 				831EC09A20CB6D17007AED10 /* SplashView.storyboard */,
 				83B9CB2120CAD9A600E73F79 /* SplashView.swift */,
 				835952D720B3B0C500E1ECDA /* Info.plist */,
-				8318C9E320C4037300144C4D /* GoogleService-Info.plist */,
+				831672E820FF6E3100981666 /* GoogleService-Info.plist */,
 				8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */,
 			);
 			path = HowlTalk;
@@ -246,6 +248,14 @@
 					835952C720B3B0C400E1ECDA = {
 						CreatedOnToolsVersion = 9.3.1;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -274,8 +284,8 @@
 			files = (
 				835952D620B3B0C500E1ECDA /* LaunchScreen.storyboard in Resources */,
 				8318C9E620C4089800144C4D /* RemoteConfigDefaults.plist in Resources */,
+				831672E920FF6E3100981666 /* GoogleService-Info.plist in Resources */,
 				831EC09B20CB6D17007AED10 /* SplashView.storyboard in Resources */,
-				8318C9E420C4037300144C4D /* GoogleService-Info.plist in Resources */,
 				835952D320B3B0C500E1ECDA /* Assets.xcassets in Resources */,
 				835952D120B3B0C400E1ECDA /* LogInViewController.storyboard in Resources */,
 				8337ECE920C6C8BD00CB2C2E /* SignUpViewController.storyboard in Resources */,
@@ -301,7 +311,6 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -312,7 +321,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -570,6 +578,7 @@
 			baseConfigurationReference = 2EC364FB256C014B919F642F /* Pods-HowlTalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HowlTalk/HowlTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77F6X5R2CN;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
@@ -577,7 +586,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -589,6 +598,7 @@
 			baseConfigurationReference = 970F5A9EFFE4AFAD66242517 /* Pods-HowlTalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HowlTalk/HowlTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 77F6X5R2CN;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
@@ -596,7 +606,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kiwan.HowlTalk2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

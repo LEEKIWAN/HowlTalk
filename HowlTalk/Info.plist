@@ -23,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.570199843462-584f14gjvj90qbrnh2h52b1jruqd2hpa</string>
+				<string>com.googleusercontent.apps.193837921579-2i86rmvlgh825n9ecrr95thtpr62n1lr</string>
 			</array>
 		</dict>
 		<dict>
@@ -31,16 +31,16 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb2016932788569357</string>
+				<string>fb294455824432603</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>2016932788569357</string>
+	<string>294455824432603</string>
 	<key>FacebookDisplayName</key>
-	<string>HowlTalk</string>
+	<string>HowlTalk2</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -52,6 +52,10 @@
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>카메라 라이브러리에 접근권한을 허용하시겠습니까?</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

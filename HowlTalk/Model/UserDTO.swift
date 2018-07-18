@@ -17,6 +17,7 @@ class UserDTO: Mappable {
     var userName: String?
     var userEmail: String?
     var profileImageURL: String?
+    var pushToken: String?
     
     required init?(map: Map) {
         

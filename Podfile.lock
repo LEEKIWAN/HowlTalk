@@ -29,6 +29,9 @@ PODS:
   - Firebase/Firestore (5.4.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (= 0.12.5)
+  - Firebase/Messaging (5.4.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.0.3)
   - Firebase/RemoteConfig (5.4.0):
     - Firebase/Core
     - FirebaseRemoteConfig (= 3.0.0)
@@ -66,6 +69,11 @@ PODS:
     - Protobuf (~> 3.1)
   - FirebaseInstanceID (3.1.1):
     - FirebaseCore (~> 5.0)
+  - FirebaseMessaging (3.0.3):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
   - FirebaseRemoteConfig (3.0.0):
     - FirebaseABTesting (~> 2.0)
     - FirebaseAnalytics (~> 5.0)
@@ -113,6 +121,8 @@ PODS:
   - GoogleToolboxForMac/DebugUtils (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GoogleToolboxForMac/Defines (2.1.4)
+  - GoogleToolboxForMac/Logger (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.4)":
@@ -166,14 +176,15 @@ PODS:
   - SKSplashView (0.1.3)
   - SwiftyBeaver (1.6.0)
   - TextFieldEffects (1.4.0)
-  - TwitterCore (3.1.0)
-  - TwitterKit (3.3.0):
+  - TwitterCore (3.2.0)
+  - TwitterKit (3.4.0):
     - TwitterCore (>= 3.1.0)
 
 DEPENDENCIES:
   - FBSDKLoginKit
   - Firebase/Core
   - Firebase/Database
+  - Firebase/Messaging
   - Firebase/RemoteConfig
   - Firebase/Storage
   - FirebaseUI
@@ -198,6 +209,7 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseFirestore
     - FirebaseInstanceID
+    - FirebaseMessaging
     - FirebaseRemoteConfig
     - FirebaseStorage
     - FirebaseUI
@@ -235,6 +247,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 27be5ac5bc75e0b17537b2bbfada8258addcc8cd
   FirebaseFirestore: b041e4a94601e18e82a863e0dcfa9d3e55cc2031
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
+  FirebaseMessaging: f43eb0c0e1da096e659de6f713038e74862a62cd
   FirebaseRemoteConfig: 3c57e4644bd6976b671ae0b725cd709f198bd1f5
   FirebaseStorage: 7ca4bb7b58a25fa647b04f524033fc7cb7eb272b
   FirebaseUI: 5d97d3d5d6a019fc960eb573ea6ce9fb8c310669
@@ -256,9 +269,9 @@ SPEC CHECKSUMS:
   SKSplashView: 8148a4893bf2d3dfe28750bc6fd71ae7cb0dda4a
   SwiftyBeaver: e45759613e50b522b0e6f53b1f0f14389b45ca34
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
-  TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
-  TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
+  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
+  TwitterKit: bc7bd086b9b724a1d888745a054e1d0b1ecc4f3f
 
-PODFILE CHECKSUM: 6adca361dd99e94c4c774d63ddd82283eb5bf309
+PODFILE CHECKSUM: 427a22676b247a0b5f795932123ac0db1a1c9760
 
 COCOAPODS: 1.5.3

@@ -5,7 +5,7 @@
 	<key>message</key>
 	<string>이 앱을 사용하기위해서는 인터넷 연결을 확인해주세요.</string>
 	<key>isEnableApp</key>
-	<false/>
+	<true/>
 	<key>themeColor</key>
 	<string>#00FFCC</string>
 </dict>

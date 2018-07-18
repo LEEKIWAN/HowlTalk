@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>570199843462-584f14gjvj90qbrnh2h52b1jruqd2hpa.apps.googleusercontent.com</string>
+	<string>193837921579-2i86rmvlgh825n9ecrr95thtpr62n1lr.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.570199843462-584f14gjvj90qbrnh2h52b1jruqd2hpa</string>
+	<string>com.googleusercontent.apps.193837921579-2i86rmvlgh825n9ecrr95thtpr62n1lr</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCOxhQLr8bXocRl2sJzyjbXuhTsVGKsTls</string>
+	<string>AIzaSyBkiod8cRxyBjOQfNKpkrz9U0iY5JI_Sqk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>570199843462</string>
+	<string>193837921579</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.kiwan.HowlTalk</string>
+	<string>com.kiwan.HowlTalk2</string>
 	<key>PROJECT_ID</key>
-	<string>howltalk-ec471</string>
+	<string>howltalk2-9697d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>howltalk-ec471.appspot.com</string>
+	<string>howltalk2-9697d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,30 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:570199843462:ios:ff7fae39b4a09929</string>
+	<string>1:193837921579:ios:b9fd44a28991a639</string>
 	<key>DATABASE_URL</key>
-	<string>https://howltalk-ec471.firebaseio.com</string>
-    
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb2016932788569357</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>2016932788569357</string>
-    <key>FacebookDisplayName</key>
-    <string>HowlTalk</string>
-    
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbapi</string>
-        <string>fb-messenger-share-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-    </array>
+	<string>https://howltalk2-9697d.firebaseio.com</string>
 </dict>
 </plist>

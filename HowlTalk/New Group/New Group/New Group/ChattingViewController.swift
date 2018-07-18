@@ -277,7 +277,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.view.layoutIfNeeded()
         
-        self.tableView.scrollToRow(at: IndexPath(row: self.commentsArray.count - 1 , section: 0), at: .bottom, animated: false)
+        //self.tableView.scrollToRow(at: IndexPath(row: self.commentsArray.count - 1 , section: 0), at: .bottom, animated: false)
     }
     
     @objc func keyboardWillBeHidden(notification: NSNotification){

@@ -9,11 +9,11 @@
 import UIKit
 import Firebase
 import GoogleSignIn
-
 import FBSDKCoreKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKGraphRequestConnectionDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKGraphRequestConnectionDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var currentView: String!
@@ -31,6 +31,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
         
         return true
     }
@@ -85,7 +100,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         let accessToken = user!.authentication.accessToken
         let name = user.profile.name
         let email = user.profile.email
-        var imageURL:URL? = nil
+        var imageURL: URL? = nil
+        let pushToken = InstanceID.instanceID().token()
         
         if GIDSignIn.sharedInstance().currentUser.profile.hasImage {
             let dimension = round(thumbSize.width * UIScreen.main.scale)
@@ -108,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
             }
             userUID = result?.user.uid
             PreferenceManager.userUID = userUID
-            self.databaseRef.child("USER_TB").child(userUID!).setValue(["userUID" : userUID, "userID" : userID, "userName" : name, "userEmail" : email, "profileImageURL" : imageURL?.absoluteString])
+            self.databaseRef.child("USER_TB").child(userUID!).setValue(["userUID" : userUID, "userID" : userID, "userName" : name, "userEmail" : email, "pushToken" : pushToken,  "profileImageURL" : imageURL?.absoluteString])
             
             self.moveToName(menuName: .Main)
         }
@@ -136,6 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
                     let imageURL = pictureData.object(forKey: "url") as! String
                     let userEmail  = userData["email"] as? String
                     let userName = userData["name"] as? String
+                    let pushToken = InstanceID.instanceID().token()
                     
                     PreferenceManager.userID = userID
                     PreferenceManager.userEmail = userEmail
@@ -156,7 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
                         }
                         userUID = result?.user.uid
                         PreferenceManager.userUID = result?.user.uid
-                        self.databaseRef.child("USER_TB").child(userUID!).setValue(["userUID" : userUID, "userID" : userID, "userName" : userName, "userEmail" : userEmail, "profileImageURL" : imageURL])
+                        self.databaseRef.child("USER_TB").child(userUID!).setValue(["userUID" : userUID, "userID" : userID, "userName" : userName, "userEmail" : userEmail, "pushToken" : pushToken, "profileImageURL" : imageURL])
                         
                         self.moveToName(menuName: .Main)
                     }
@@ -186,6 +203,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
 //                let imageURL = pictureData.object(forKey: "url") as! String
                 let userEmail  = user.user.email
                 let userName = user.user.displayName
+                let pushToken = InstanceID.instanceID().token()
                 
                 PreferenceManager.userUID = userUID
                 PreferenceManager.userName = userName
@@ -193,7 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
                 PreferenceManager.userPassword = password
                 PreferenceManager.loginMethod = SocialLoginMethod.Direct.rawValue
                
-                self.databaseRef.child("USER_TB").child(userUID).setValue(["userUID" : userUID, "userName" : userName, "userEmail" : userEmail])
+                self.databaseRef.child("USER_TB").child(userUID).setValue(["userUID" : userUID, "userName" : userName, "pushToken" : pushToken, "userEmail" : userEmail])
                 //
                 
                 self.moveToName(menuName: .Main)

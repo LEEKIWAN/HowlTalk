@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 
 class ChattingRoom: UITableViewCell {
-    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timeStampLabel: UILabel!
