@@ -34,6 +34,8 @@
 		835952D620B3B0C500E1ECDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835952D420B3B0C500E1ECDA /* LaunchScreen.storyboard */; };
 		835A179B20D93B9A00518FB0 /* CommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835A179A20D93B9A00518FB0 /* CommentDTO.swift */; };
 		837300F420F3861A0050B191 /* ChattingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837300F320F3861A0050B191 /* ChattingListViewController.swift */; };
+		83A3AA9F210209940083864E /* NotificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3AA9E210209940083864E /* NotificationDTO.swift */; };
+		83A3AAA121020A030083864E /* NotificationMsgDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3AAA021020A030083864E /* NotificationMsgDTO.swift */; };
 		83B9CB2220CAD9A600E73F79 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9CB2120CAD9A600E73F79 /* SplashView.swift */; };
 		83E4F83120F62C1C0066643A /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E4F83020F62C1C0066643A /* Int+Extension.swift */; };
 		83E7D6EC20CC12EF00E5C379 /* SocialLoginMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */; };
@@ -71,6 +73,8 @@
 		835952D720B3B0C500E1ECDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		835A179A20D93B9A00518FB0 /* CommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDTO.swift; sourceTree = "<group>"; };
 		837300F320F3861A0050B191 /* ChattingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListViewController.swift; sourceTree = "<group>"; };
+		83A3AA9E210209940083864E /* NotificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDTO.swift; sourceTree = "<group>"; };
+		83A3AAA021020A030083864E /* NotificationMsgDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMsgDTO.swift; sourceTree = "<group>"; };
 		83B9CB2120CAD9A600E73F79 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		83E4F83020F62C1C0066643A /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLoginMethod.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				83329B3320CFFDF300DF5C2F /* UserDTO.swift */,
 				833F538E20D294270085D289 /* ChattingDTO.swift */,
 				835A179A20D93B9A00518FB0 /* CommentDTO.swift */,
+				83A3AA9E210209940083864E /* NotificationDTO.swift */,
+				83A3AAA021020A030083864E /* NotificationMsgDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,6 +340,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -360,6 +367,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -428,12 +436,14 @@
 				835A179B20D93B9A00518FB0 /* CommentDTO.swift in Sources */,
 				833F538F20D294270085D289 /* ChattingDTO.swift in Sources */,
 				8350372520C94BB200CCE958 /* UIAlertController.swift in Sources */,
+				83A3AAA121020A030083864E /* NotificationMsgDTO.swift in Sources */,
 				835952CC20B3B0C400E1ECDA /* AppDelegate.swift in Sources */,
 				8318C9E220C3FD7D00144C4D /* Logger.swift in Sources */,
 				8337ECE420C6C60D00CB2C2E /* UIColor+Extension.swift in Sources */,
 				83E7D6EC20CC12EF00E5C379 /* SocialLoginMethod.swift in Sources */,
 				83329B3420CFFDF300DF5C2F /* UserDTO.swift in Sources */,
 				8347056D20C94F1400C5B44E /* MainViewController.swift in Sources */,
+				83A3AA9F210209940083864E /* NotificationDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

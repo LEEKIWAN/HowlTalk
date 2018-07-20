@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 
 class MyMessageCell: UITableViewCell {
@@ -117,6 +118,8 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
             self.sendButton.isHidden = true
             self.textViewDidChange(self.textView)
             Database.database().reference().child("ChattingRoom_TB").child(chattingRoomID!).child("comments").childByAutoId().setValue(value) { (error, reference) in
+                
+                self.requestSendGCM()
             }
         }
     }
@@ -185,6 +188,27 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
             self.destUserModel = UserDTO(JSON: dataDict)
         }
     }
+    
+    func requestSendGCM() {
+        let url = "https://fcm.googleapis.com/fcm/send"
+        
+        let header: HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "Authorization" : "key=AIzaSyB7wNr_CwwgFoO15NNMkOoKIy7JWns5YgA"
+        ]
+        
+        let notificationDTO = NotificationDTO()
+        notificationDTO.to = destUserModel?.pushToken
+        notificationDTO.notification.title = "Title"
+        notificationDTO.notification.body = "body"
+        
+        let params = notificationDTO.toJSON()
+        
+//        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding, headers: header)
+        
+        Alamofire.request(url, method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default, headers: header)
+    }
+    
     
     //MARK: - UITextViewDelegate
     func textViewDidChange(_ textView: UITextView) {

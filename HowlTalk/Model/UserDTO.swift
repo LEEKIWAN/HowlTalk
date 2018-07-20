@@ -29,6 +29,7 @@ class UserDTO: Mappable {
         userName <- map["userName"]
         userEmail <- map["userEmail"]
         profileImageURL <- map["profileImageURL"]
+        pushToken <- map["pushToken"]
     }
 
     

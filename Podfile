@@ -18,5 +18,8 @@ target 'HowlTalk' do
   pod 'NVActivityIndicatorView'
   pod 'Kingfisher', '~> 4.0'
   pod 'ObjectMapper', '~> 3.2'
-  pod 'Firebase/Messaging' 
+  pod 'Firebase/Messaging'
+  pod 'Alamofire', '~> 4.7'
+  
+  
 end

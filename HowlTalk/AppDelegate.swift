@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         
         application.registerForRemoteNotifications()
         
+        
+        
         return true
     }
 
@@ -92,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKG
         
         let authentication = user.authentication
         let credential = GoogleAuthProvider.credential(withIDToken: (authentication?.idToken)!, accessToken: (authentication?.accessToken)!)
+        
         
         var userUID: String? = nil
         let thumbSize = CGSize.init(width: 500, height: 500)
