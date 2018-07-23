@@ -18,6 +18,7 @@ class UserDTO: Mappable {
     var userEmail: String?
     var profileImageURL: String?
     var pushToken: String?
+    var statusMessage: String?
     
     required init?(map: Map) {
         
@@ -30,6 +31,8 @@ class UserDTO: Mappable {
         userEmail <- map["userEmail"]
         profileImageURL <- map["profileImageURL"]
         pushToken <- map["pushToken"]
+        statusMessage <- map["statusMessage"]
+        
     }
 
     

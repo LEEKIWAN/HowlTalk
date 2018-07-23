@@ -114,12 +114,15 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
                 
             ]
             
+            let sendText = self.textView.text
+            
             self.textView.text = ""
+            
             self.sendButton.isHidden = true
             self.textViewDidChange(self.textView)
             Database.database().reference().child("ChattingRoom_TB").child(chattingRoomID!).child("comments").childByAutoId().setValue(value) { (error, reference) in
                 
-                self.requestSendGCM()
+                self.requestSendGCM(body: sendText!)
             }
         }
     }
@@ -189,7 +192,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func requestSendGCM() {
+    func requestSendGCM(body: String) {
         let url = "https://fcm.googleapis.com/fcm/send"
         
         let header: HTTPHeaders = [
@@ -199,12 +202,10 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let notificationDTO = NotificationDTO()
         notificationDTO.to = destUserModel?.pushToken
-        notificationDTO.notification.title = "Title"
-        notificationDTO.notification.body = "body"
+        notificationDTO.notification.title = destUserModel?.userName
+        notificationDTO.notification.body = body
         
         let params = notificationDTO.toJSON()
-        
-//        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding, headers: header)
         
         Alamofire.request(url, method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default, headers: header)
     }

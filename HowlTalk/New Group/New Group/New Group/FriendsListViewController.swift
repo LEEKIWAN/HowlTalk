@@ -15,12 +15,18 @@ class FriendsListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var statusMessageLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
         profileImageView.layer.borderWidth = 1
         profileImageView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        statusMessageLabel.layer.cornerRadius = profileImageView.frame.size.height / 2
+        statusMessageLabel.layer.borderWidth = 1
+        statusMessageLabel.layer.borderColor = UIColor.darkGray.cgColor
     }
     
     
@@ -31,6 +37,17 @@ class FriendsListTableViewCell: UITableViewCell {
             let url = URL(string: profileImageURL)
             profileImageView.kf.setImage(with: url, placeholder:  #imageLiteral(resourceName: "iconmonstr-user-19-240"))
         }
+        
+        if let message = cellData.statusMessage, message.count > 0 {
+            statusMessageLabel.text = message
+            
+            statusMessageLabel.isHidden = false
+        }
+        else {
+            statusMessageLabel.isHidden = true
+        }
+        
+        
     }
     
 }

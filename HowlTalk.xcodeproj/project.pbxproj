@@ -13,6 +13,7 @@
 		8318C9E620C4089800144C4D /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */; };
 		831EC09B20CB6D17007AED10 /* SplashView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 831EC09A20CB6D17007AED10 /* SplashView.storyboard */; };
 		831EC09D20CC0F84007AED10 /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831EC09C20CC0F84007AED10 /* PreferenceManager.swift */; };
+		832B4CD02105F7D300236CEC /* StatusMessageChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832B4CCF2105F7D300236CEC /* StatusMessageChangeViewController.swift */; };
 		83329B3120CFF68900DF5C2F /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83329B3020CFF68900DF5C2F /* FriendsListViewController.swift */; };
 		83329B3420CFFDF300DF5C2F /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83329B3320CFFDF300DF5C2F /* UserDTO.swift */; };
 		8337ECE420C6C60D00CB2C2E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */; };
@@ -37,6 +38,7 @@
 		83A3AA9F210209940083864E /* NotificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3AA9E210209940083864E /* NotificationDTO.swift */; };
 		83A3AAA121020A030083864E /* NotificationMsgDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3AAA021020A030083864E /* NotificationMsgDTO.swift */; };
 		83B9CB2220CAD9A600E73F79 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B9CB2120CAD9A600E73F79 /* SplashView.swift */; };
+		83E29EF32104C38C00615B68 /* ProfileManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E29EF22104C38B00615B68 /* ProfileManagementViewController.swift */; };
 		83E4F83120F62C1C0066643A /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E4F83020F62C1C0066643A /* Int+Extension.swift */; };
 		83E7D6EC20CC12EF00E5C379 /* SocialLoginMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +52,7 @@
 		8318C9E520C4089800144C4D /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		831EC09A20CB6D17007AED10 /* SplashView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashView.storyboard; sourceTree = "<group>"; };
 		831EC09C20CC0F84007AED10 /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
+		832B4CCF2105F7D300236CEC /* StatusMessageChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMessageChangeViewController.swift; sourceTree = "<group>"; };
 		83329B3020CFF68900DF5C2F /* FriendsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		83329B3320CFFDF300DF5C2F /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		8337ECE220C6C60D00CB2C2E /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		83A3AA9E210209940083864E /* NotificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDTO.swift; sourceTree = "<group>"; };
 		83A3AAA021020A030083864E /* NotificationMsgDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMsgDTO.swift; sourceTree = "<group>"; };
 		83B9CB2120CAD9A600E73F79 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		83E29EF22104C38B00615B68 /* ProfileManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManagementViewController.swift; sourceTree = "<group>"; };
 		83E4F83020F62C1C0066643A /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		83E7D6EB20CC12EF00E5C379 /* SocialLoginMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLoginMethod.swift; sourceTree = "<group>"; };
 		970F5A9EFFE4AFAD66242517 /* Pods-HowlTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 				835952CD20B3B0C400E1ECDA /* LogInViewController.swift */,
 				8337ECE620C6C8B500CB2C2E /* SignUpViewController.swift */,
 				833D3B8C20CD36A6006E327B /* PasswordFindViewController.swift */,
+				83E29EF22104C38B00615B68 /* ProfileManagementViewController.swift */,
+				832B4CCF2105F7D300236CEC /* StatusMessageChangeViewController.swift */,
 			);
 			name = Controller;
 			path = "New Group/New Group/New Group";
@@ -427,8 +433,10 @@
 				8337ECE720C6C8B500CB2C2E /* SignUpViewController.swift in Sources */,
 				83329B3120CFF68900DF5C2F /* FriendsListViewController.swift in Sources */,
 				8337ECE520C6C60D00CB2C2E /* Date+Extension.swift in Sources */,
+				83E29EF32104C38C00615B68 /* ProfileManagementViewController.swift in Sources */,
 				83E4F83120F62C1C0066643A /* Int+Extension.swift in Sources */,
 				833D3B8D20CD36A6006E327B /* PasswordFindViewController.swift in Sources */,
+				832B4CD02105F7D300236CEC /* StatusMessageChangeViewController.swift in Sources */,
 				833D3B8920CD19A1006E327B /* MenuName.swift in Sources */,
 				83B9CB2220CAD9A600E73F79 /* SplashView.swift in Sources */,
 				835952CE20B3B0C400E1ECDA /* LogInViewController.swift in Sources */,
