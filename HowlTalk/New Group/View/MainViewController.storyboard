@@ -50,26 +50,31 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZc-hg-jFz">
-                                                    <rect key="frame" x="78" y="25" width="201.5" height="18"/>
+                                                    <rect key="frame" x="78" y="25" width="263" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="message" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCD-nJ-4CM">
-                                                    <rect key="frame" x="292.5" y="23.5" width="54.5" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLg-zX-cmp">
+                                                    <rect key="frame" x="354" y="11" width="16" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="lta-df-kas"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                                                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="IZc-hg-jFz" firstAttribute="leading" secondItem="AHR-rb-gM2" secondAttribute="trailing" constant="13" id="40i-SV-VIy"/>
                                                 <constraint firstItem="IZc-hg-jFz" firstAttribute="centerY" secondItem="AHR-rb-gM2" secondAttribute="centerY" id="95O-ZT-Lc8"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="VCD-nJ-4CM" secondAttribute="trailing" constant="13" id="E0S-fy-dt0"/>
                                                 <constraint firstAttribute="bottom" secondItem="AHR-rb-gM2" secondAttribute="bottom" constant="6" id="K1A-XQ-dwe"/>
                                                 <constraint firstItem="AHR-rb-gM2" firstAttribute="leading" secondItem="AN4-Wl-fLn" secondAttribute="leading" constant="20" id="W2m-xr-WpU"/>
-                                                <constraint firstItem="VCD-nJ-4CM" firstAttribute="centerY" secondItem="AN4-Wl-fLn" secondAttribute="centerY" id="frv-Ud-gQ7"/>
-                                                <constraint firstItem="VCD-nJ-4CM" firstAttribute="leading" secondItem="IZc-hg-jFz" secondAttribute="trailing" constant="13" id="sJA-yx-ZHc"/>
+                                                <constraint firstAttribute="trailing" secondItem="HLg-zX-cmp" secondAttribute="trailing" constant="5" id="bX0-3g-XeI"/>
+                                                <constraint firstItem="HLg-zX-cmp" firstAttribute="centerY" secondItem="AN4-Wl-fLn" secondAttribute="centerY" id="jaT-bA-VSh"/>
+                                                <constraint firstItem="HLg-zX-cmp" firstAttribute="leading" secondItem="IZc-hg-jFz" secondAttribute="trailing" constant="13" id="ols-gZ-gBb"/>
                                                 <constraint firstItem="AHR-rb-gM2" firstAttribute="top" secondItem="AN4-Wl-fLn" secondAttribute="topMargin" id="x6h-ZR-p9n"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -77,7 +82,7 @@
                                         <connections>
                                             <outlet property="nameLabel" destination="IZc-hg-jFz" id="88b-FB-51D"/>
                                             <outlet property="profileImageView" destination="AHR-rb-gM2" id="3JK-n7-ToV"/>
-                                            <outlet property="statusMessageLabel" destination="VCD-nJ-4CM" id="Cnm-mK-EPE"/>
+                                            <outlet property="statusMessageButton" destination="HLg-zX-cmp" id="SU8-Sr-h7D"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

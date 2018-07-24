@@ -15,7 +15,8 @@ class FriendsListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var statusMessageLabel: UILabel!
+//    @IBOutlet weak var statusMessageLabel: UILabel!
+    @IBOutlet weak var statusMessageButton: UIButton!
     
     
     override func awakeFromNib() {
@@ -24,9 +25,11 @@ class FriendsListTableViewCell: UITableViewCell {
         profileImageView.layer.borderWidth = 1
         profileImageView.layer.borderColor = UIColor.lightGray.cgColor
         
-        statusMessageLabel.layer.cornerRadius = profileImageView.frame.size.height / 2
-        statusMessageLabel.layer.borderWidth = 1
-        statusMessageLabel.layer.borderColor = UIColor.darkGray.cgColor
+        statusMessageButton.layer.cornerRadius = 3
+        statusMessageButton.layer.borderWidth = 1
+        statusMessageButton.layer.borderColor = UIColor.darkGray.cgColor
+        statusMessageButton.titleLabel?.numberOfLines = 2
+        
     }
     
     
@@ -39,15 +42,12 @@ class FriendsListTableViewCell: UITableViewCell {
         }
         
         if let message = cellData.statusMessage, message.count > 0 {
-            statusMessageLabel.text = message
-            
-            statusMessageLabel.isHidden = false
+            statusMessageButton.setTitle(message, for: .normal)
+            statusMessageButton.isHidden = false
         }
         else {
-            statusMessageLabel.isHidden = true
+            statusMessageButton.isHidden = true
         }
-        
-        
     }
     
 }
