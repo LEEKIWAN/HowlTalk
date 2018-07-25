@@ -11,11 +11,17 @@ import Firebase
 
 class StatusMessageChangeViewController: UIViewController, UITextViewDelegate {
 
+    var willSetStatusMessage: String?
+    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textLengthLabel: UILabel!
     @IBOutlet weak var changeButton: UIButton!
     
     override func viewDidLoad() {
+        if let statusMsg = willSetStatusMessage {
+            textView.text = statusMsg
+        }
+        
         self.setTextLength()
     }
     
@@ -35,8 +41,12 @@ class StatusMessageChangeViewController: UIViewController, UITextViewDelegate {
         let dic = ["statusMessage" : textView.text]
         let UID = Auth.auth().currentUser?.uid
         
-        Database.database().reference().child("USER_TB").child(UID!).updateChildValues(dic)
+//        Database.database().reference().child("USER_TB").child(UID!).updateChildValues(dic)
         
+        Database.database().reference().child("USER_TB").child(UID!).updateChildValues(dic) { (error, reference) in
+            
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     //MARK: - UITextViewDelegate

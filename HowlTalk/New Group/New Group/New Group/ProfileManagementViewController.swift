@@ -38,12 +38,9 @@ class ProfileManagementViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showStatusMessageChangeView" {
-            let destViewController = segue.destination as! StatusMessageChangeViewController
-            
-            if let message = userInfo?.statusMessage {
-//                destViewController.textView.text = message
+            if let destViewController = segue.destination as? StatusMessageChangeViewController {
+                destViewController.willSetStatusMessage = self.userInfo?.statusMessage
             }
-            
         }
     }
     

@@ -28,7 +28,9 @@ class FriendsListTableViewCell: UITableViewCell {
         statusMessageButton.layer.cornerRadius = 3
         statusMessageButton.layer.borderWidth = 1
         statusMessageButton.layer.borderColor = UIColor.darkGray.cgColor
+        statusMessageButton.titleLabel?.lineBreakMode = .byTruncatingTail
         statusMessageButton.titleLabel?.numberOfLines = 2
+        
         
     }
     
@@ -62,6 +64,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.requestFriendsList()
     }
     

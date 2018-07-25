@@ -83,6 +83,8 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         self.sendButton.layer.cornerRadius = self.sendButton.frame.size.height / 2
         self.textView.textContainerInset = UIEdgeInsets(top: textView.textContainerInset.top, left: 10, bottom: textView.textContainerInset.bottom, right: 60)
 
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+        self.navigationController?.navigationBar.tintColor = UIColor.white
 
     }
     
@@ -189,6 +191,8 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
             
             let dataDict = snapshot.value as! [String : AnyObject]
             self.destUserModel = UserDTO(JSON: dataDict)
+            
+            self.navigationController?.navigationBar.topItem?.title = self.destUserModel?.userName
         }
     }
     
