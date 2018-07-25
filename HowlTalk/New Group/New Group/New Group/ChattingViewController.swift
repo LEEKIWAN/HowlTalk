@@ -60,6 +60,7 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var consSendButtonBMargin: NSLayoutConstraint!
+    @IBOutlet weak var consTableViewTMargin: NSLayoutConstraint!
     
     @IBOutlet weak var consTextViewheight: NSLayoutConstraint!
     
@@ -304,13 +305,15 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.consSendButtonBMargin.constant = keyboardHeight
         
+        self.consTableViewTMargin.constant = -keyboardHeight
+        
         self.view.layoutIfNeeded()
         
-        //self.tableView.scrollToRow(at: IndexPath(row: self.commentsArray.count - 1 , section: 0), at: .bottom, animated: false)
     }
     
     @objc func keyboardWillBeHidden(notification: NSNotification){
         self.consSendButtonBMargin.constant = 0
+        self.consTableViewTMargin.constant = 0
         self.view.layoutIfNeeded()
     }
     

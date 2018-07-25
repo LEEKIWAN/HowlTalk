@@ -175,7 +175,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hcm-ty-zd5">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyMessageCell" rowHeight="200" id="kL0-da-cRz" customClass="MyMessageCell" customModule="HowlTalk" customModuleProvider="target">
@@ -295,11 +295,11 @@
                         <constraints>
                             <constraint firstItem="6s4-3V-dWm" firstAttribute="trailing" secondItem="hcm-ty-zd5" secondAttribute="trailing" id="H2g-gF-cM8"/>
                             <constraint firstItem="6s4-3V-dWm" firstAttribute="bottom" secondItem="kYT-9M-PbW" secondAttribute="bottom" id="Jha-Hr-mvf"/>
+                            <constraint firstItem="hcm-ty-zd5" firstAttribute="top" secondItem="J5g-TP-oHv" secondAttribute="top" id="VXo-el-RZJ"/>
                             <constraint firstItem="kYT-9M-PbW" firstAttribute="leading" secondItem="6s4-3V-dWm" secondAttribute="leading" id="ZWT-3Q-1fH"/>
                             <constraint firstItem="kYT-9M-PbW" firstAttribute="trailing" secondItem="6s4-3V-dWm" secondAttribute="trailing" id="gkG-Ug-xgu"/>
                             <constraint firstItem="kYT-9M-PbW" firstAttribute="top" secondItem="hcm-ty-zd5" secondAttribute="bottom" id="iR4-YU-j9N"/>
                             <constraint firstItem="hcm-ty-zd5" firstAttribute="leading" secondItem="6s4-3V-dWm" secondAttribute="leading" id="lSL-Pf-QUY"/>
-                            <constraint firstItem="hcm-ty-zd5" firstAttribute="top" secondItem="6s4-3V-dWm" secondAttribute="top" id="vL4-Lf-Yya"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6s4-3V-dWm"/>
                         <connections>
@@ -308,6 +308,7 @@
                     </view>
                     <connections>
                         <outlet property="consSendButtonBMargin" destination="Jha-Hr-mvf" id="zme-Qb-lfU"/>
+                        <outlet property="consTableViewTMargin" destination="VXo-el-RZJ" id="nxK-XJ-J5j"/>
                         <outlet property="consTextViewheight" destination="iNr-W5-Tro" id="DPb-jY-zcC"/>
                         <outlet property="sendButton" destination="NMc-SD-pva" id="mzy-x5-BNH"/>
                         <outlet property="tableView" destination="hcm-ty-zd5" id="chT-au-NGO"/>
