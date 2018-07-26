@@ -68,6 +68,9 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     var chattingRoomID: String?
     
     var uid: String? = Auth.auth().currentUser?.uid
+    var databaseRef: DatabaseReference?
+    var observe: UInt?
+    
     var destUID: String?
     var commentsArray: [CommentDTO] = []
     var destUserModel: UserDTO?
@@ -96,6 +99,9 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+//        databaseRef?.removeAllObservers()
+        databaseRef?.removeObserver(withHandle: observe!)
+        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -168,20 +174,31 @@ class ChattingViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func requestMessageList() {
-        Database.database().reference().child("ChattingRoom_TB").child(self.chattingRoomID!).child("comments").observe(.value) { (snapshot) in
+        databaseRef = Database.database().reference().child("ChattingRoom_TB").child(self.chattingRoomID!).child("comments")
+        observe = databaseRef?.observe(.value) { (snapshot) in
             self.commentsArray.removeAll()
         
+            var readUserDic: Dictionary<String, Any> =  [ : ]
             let snapshots = snapshot.children.allObjects as! [DataSnapshot]
         
             for data in snapshots {
+
                 let dataDict = data.value as! [String : AnyObject]
                 let comment = CommentDTO(JSON: dataDict)
+                comment?.readUsers[self.uid!] = true
                 
                 self.commentsArray.append(comment!)
-                self.tableView.reloadData()
+                
+                let key = data.key
+                readUserDic[key] = comment?.toJSON()
             }
             
-            self.tableView.scrollToRow(at: IndexPath(row: self.commentsArray.count - 1 , section: 0), at: .bottom, animated: false)
+            snapshot.ref.updateChildValues(readUserDic, withCompletionBlock: { (error, databaseRef) in
+                self.tableView.reloadData()
+                self.tableView.scrollToRow(at: IndexPath(row: self.commentsArray.count - 1 , section: 0), at: .bottom, animated: false)
+            })
+            
+            
         }
     }
     

@@ -13,6 +13,7 @@ class CommentDTO: Mappable {
     public var uid: String?
     public var message: String?
     public var timeStamp: Int?
+    public var readUsers: Dictionary<String, Bool> = [:]
     
     init () {
         
@@ -26,6 +27,7 @@ class CommentDTO: Mappable {
         uid <- map["uid"]
         message <- map["message"]
         timeStamp <- map["timeStamp"]
+        readUsers <- map["readUsers"]
     }
     
 }
