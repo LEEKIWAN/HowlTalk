@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TextFieldEffects
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
@@ -18,9 +17,9 @@ class SignUpViewController: UIViewController, UIGestureRecognizerDelegate, NVAct
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var contentsView: UIView!
-    @IBOutlet weak var emailTextField: HoshiTextField!
-    @IBOutlet weak var nameTextField: HoshiTextField!
-    @IBOutlet weak var passwordTextField: HoshiTextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
